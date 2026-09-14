@@ -38,3 +38,8 @@
 | keyClients | client, project, status(green/yellow/red), progress(0-100), milestones[{name, done}], update, risk |
 | labels | item, stage(1資料準備 2送件 3審查 4補件 5核發), expected, owner, note, change |
 | ai | name, progress, done[], next[], blockers, need |
+
+選填欄位：
+- prospects / labels 每筆可加 `details[]`（條列細項）、prospects 可加 `link {label, url}`。
+- 每區塊可加 `xxxNotes {title, items[], links[]}` 補充說明卡（prospectsNotes / keyClientsNotes / labelsNotes / aiNotes）。
+- keyClients 或 ai 為空時，可用 `keyClientsNote` / `aiNote` 顯示一句說明。

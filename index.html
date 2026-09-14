@@ -171,6 +171,13 @@
   }
   .blocker b { font-weight: 700; }
 
+  ul.sub { margin: 6px 0 0; padding-left: 18px; font-size: 13px; color: var(--ink-2); }
+  ul.sub li { margin: 3px 0; }
+  .ref { font-size: 13px; margin-top: 6px; }
+  .notes { margin-top: 14px; }
+  .notes ul.clean li { margin: 8px 0; }
+  .section-note { color: var(--ink-2); }
+
   footer { max-width: 1180px; margin: 0 auto; padding: 0 20px 30px; color: var(--ink-3); font-size: 12px; }
 
   @media print {
@@ -222,6 +229,9 @@
   const chip = c => { const [cls, t] = CHANGE[c] || CHANGE.same; return `<span class="chip ${cls}">${t}</span>`; };
   const stages = (n, list) => `<div class="stage-cell"><div class="stages">${list.map((_, i) => `<i class="${i < n ? "on" : ""}"></i>`).join("")}</div><div class="stage-label">${n}/${list.length} ${esc(list[n - 1] || "")}</div></div>`;
   const li = arr => (arr && arr.length) ? `<ul class="clean">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<div class="empty">無</div>`;
+  const sub = arr => (arr && arr.length) ? `<ul class="sub">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
+  const link = l => l ? `<div class="ref"><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label || "參考連結")} ↗</a></div>` : "";
+  const notes = n => n ? `<div class="card notes"><h3>${esc(n.title || "補充說明")}</h3>${li(n.items)}${(n.links || []).map(link).join("")}</div>` : "";
 
   function secHead(num, title, hint) {
     return `<div class="sec-head"><span class="num">${num}</span><h2>${title}</h2><span class="hint">${hint || ""}</span></div>`;
@@ -261,11 +271,12 @@
             <tbody>${ps.length ? ps.map(p => `<tr>
               <td class="name">${esc(p.name)}</td><td class="muted">${esc(p.industry)}</td>
               <td>${stages(p.stage, PROSPECT_STAGES)}</td><td class="muted">${esc(p.owner)}</td>
-              <td>${esc(p.update)}</td><td>${esc(p.next)}</td><td>${chip(p.change)}</td></tr>`).join("")
+              <td>${esc(p.update)}${sub(p.details)}${link(p.link)}</td><td>${esc(p.next)}</td><td>${chip(p.change)}</td></tr>`).join("")
               : `<tr><td colspan="7" class="empty">無</td></tr>`}
             </tbody>
           </table>
         </div>
+        ${notes(w.prospectsNotes)}
       </section>`;
 
     // ---- 2. key clients ----
@@ -282,8 +293,9 @@
             <div class="ms">${(c.milestones || []).map(m => `<span class="${m.done ? "done" : ""}">${esc(m.name)}</span>`).join("")}</div>
             <div class="kv"><b>本週</b>${esc(c.update)}</div>
             <div class="kv risk"><b>風險</b>${esc(c.risk || "無")}</div>
-          </div>`).join("") || `<div class="card empty">無</div>`}
+          </div>`).join("") || `<div class="card section-note">${esc(w.keyClientsNote || "本週無特別報告事項")}</div>`}
         </div>
+        ${notes(w.keyClientsNotes)}
       </section>`;
 
     // ---- 3. labels ----
@@ -297,11 +309,12 @@
             <tbody>${lb.length ? lb.map(l => `<tr>
               <td class="name">${esc(l.item)}</td><td>${stages(l.stage, LABEL_STAGES)}</td>
               <td class="muted">${esc(l.expected)}</td><td class="muted">${esc(l.owner)}</td>
-              <td>${esc(l.note)}</td><td>${chip(l.change)}</td></tr>`).join("")
+              <td>${esc(l.note)}${sub(l.details)}</td><td>${chip(l.change)}</td></tr>`).join("")
               : `<tr><td colspan="6" class="empty">無</td></tr>`}
             </tbody>
           </table>
         </div>
+        ${notes(w.labelsNotes)}
       </section>`;
 
     // ---- 4. AI ----
@@ -319,8 +332,9 @@
               <div><h4>下週計畫</h4>${li(a.next)}</div>
             </div>
             ${(a.blockers || a.need) ? `<div class="blocker">${a.blockers ? `<b>阻礙：</b>${esc(a.blockers)}` : ""}${a.blockers && a.need ? "<br>" : ""}${a.need ? `<b>需要：</b>${esc(a.need)}` : ""}</div>` : ""}
-          </div>`).join("") || `<div class="card empty">無</div>`}
+          </div>`).join("") || `<div class="card section-note">${esc(w.aiNote || "本週無特別報告事項")}</div>`}
         </div>
+        ${notes(w.aiNotes)}
       </section>`;
 
     app.innerHTML = html;

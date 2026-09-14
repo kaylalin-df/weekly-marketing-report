@@ -9,109 +9,99 @@ window.WEEKLY_DATA = [
     range: "2026/09/14 – 09/18",
     updated: "2026/09/14",
     highlights: [
-      "示範資料：本週新增 2 家潛在客戶進入提案階段，pipeline 共 6 家。",
-      "示範資料：A 客戶回收再生料專案進入量產驗證，預計 10 月完成。",
-      "示範資料：AI 報價助理完成第一版，下週內部試用。"
+      "遠東銀行 9/10 實體會議提出 6 項需求：門市寶特瓶回收箱、智能回收箱租賃、廢制服再製、高／低價禮品、PCR 鏡框，需跨部門協力回覆。",
+      "華邦電子對名片盒、識別證套、多功能掛繩有興趣，本週寄樣；對方將提供乾淨濾心濾袋，請研發評估再生造粒可能性。",
+      "WACOM 希望做「報廢品看得見」的再生產品，並有中國／越南大量鋁筆殼與 PC+ABS 再生粒需去化。",
+      "循環標誌：8/31 起開放五大類以外的個案申請。HDPE 瓶器、雨傘、PVC 地板各有可行的申請路徑。",
+      "AI 開發本週啟動第一階段盤點。"
     ],
     decisions: [
-      { title: "B 公司報價折扣授權", detail: "對方要求量價折扣 8%，超出業務授權範圍，需副總核定。", due: "9/19" },
-      { title: "循環標誌第三方檢測預算", detail: "產品 Y 檢測費用約 NT$120K，需確認是否本季執行。", due: "9/26" }
+      { title: "WACOM 中國／越南在地去化方案", detail: "客戶報廢鋁筆殼與 PC+ABS 再生粒多在中國，是否評估在中國找合作廠商做再生產品？", due: "" },
+      { title: "PVC 地板循環標誌個案申請", detail: "科長建議需有第三方驗證＋成熟商業模式，通過機率才高。是否與文康一起投入第三方驗證後送件？", due: "" },
+      { title: "遠銀廢制服衣to衣路線", detail: "遠東新建議回原制服廠處理（需 500kg 以上、專案評估）。是否改推午洋的織品混塑板材／射出路線（如老花眼鏡）？", due: "" }
     ],
     prospects: [
-      { name: "A 公司", industry: "家電", stage: 4, owner: "Kayla", update: "完成第二輪議約，對方法務審合約中", next: "9/20 前回覆合約修訂", change: "up" },
-      { name: "B 公司", industry: "包材", stage: 3, owner: "Kayla", update: "報價已送出，對方要求折扣", next: "等副總核定折扣後回覆", change: "same" },
-      { name: "C 公司", industry: "汽車零件", stage: 2, owner: "Sam", update: "完成提案簡報，對方採購主管有興趣", next: "安排工廠參訪", change: "up" },
-      { name: "D 公司", industry: "建材", stage: 2, owner: "Sam", update: "初步提案，需補充 PCR 料規格書", next: "下週補件", change: "new" },
-      { name: "E 公司", industry: "紡織", stage: 1, owner: "Kayla", update: "展會認識，已寄公司簡介", next: "約線上會議", change: "new" },
-      { name: "F 公司", industry: "電子", stage: 1, owner: "Sam", update: "對方暫無需求，保持聯繫", next: "Q4 再追", change: "down" }
-    ],
-    keyClients: [
       {
-        client: "X 客戶", project: "再生 PP 料導入量產", status: "green", progress: 70,
-        milestones: [
-          { name: "樣品認證", done: true }, { name: "小量試產", done: true },
-          { name: "量產驗證", done: false }, { name: "正式供貨", done: false }
-        ],
-        update: "量產驗證第一批 5 噸已出貨，客戶回饋物性符合規格。",
-        risk: "無"
+        name: "華邦電子", industry: "半導體", stage: 2, owner: "Kayla",
+        update: "對名片盒、識別證套、多功能掛繩三款產品有興趣。對方將寄乾淨版濾心濾袋給我們。",
+        next: "本週寄送三款樣品；收到濾心濾袋後交研發部評估再生製成塑膠粒子的可能性。",
+        change: "up"
       },
       {
-        client: "Y 客戶", project: "包材減碳方案", status: "yellow", progress: 40,
-        milestones: [
-          { name: "需求訪談", done: true }, { name: "方案提出", done: true },
-          { name: "碳足跡計算", done: false }, { name: "客戶簽核", done: false }
+        name: "遠東銀行", industry: "金融", stage: 2, owner: "Kayla",
+        update: "9/10 實體會議，對方提出 6 項需求：",
+        details: [
+          "全台門市放寶特瓶回收箱（鼓勵民眾回收，傾向大豐清運，需提供大中小規格尺寸參考）。",
+          "智能回收箱租賃方案（2～3 台）。",
+          "廢制服回收再製：除衣to衣還能做什麼。遠東新回覆：該批 100% rPET 制服由集團其他公司製作，衣to衣建議找原製作廠；通常只收自家製作的衣服、基本量 500kg 以上、需大量人工，無規格化模組化商業模式，皆需專案評估。已另詢午洋：織品打碎混塑（多為 PP、少部分 PC）做板材或射出；午洋有做射出太陽眼鏡，已請確認能否做成老花眼鏡。",
+          "高價禮品需求：擴香品（擴香木、擴香石等）。",
+          "低價禮品需求：$5／個，建議 PP 板材製作書籤、年曆卡。",
+          "詢問 PCR 塑膠製成鏡框（門市老花眼鏡需求）。"
         ],
-        update: "碳足跡計算需客戶提供上游數據，對方窗口回覆延遲。",
-        risk: "時程可能延後 2 週，已向對方主管反映。"
+        next: "整理回收箱規格與智能回收箱租賃方案；等午洋回覆老花眼鏡可行性；提出禮品提案。",
+        change: "up"
       },
       {
-        client: "Z 客戶", project: "年度回收合約續約", status: "red", progress: 20,
-        milestones: [
-          { name: "續約提案", done: true }, { name: "價格談判", done: false },
-          { name: "合約簽署", done: false }
+        name: "WACOM", industry: "電腦周邊", stage: 1, owner: "Kayla",
+        update: "客戶分享 NVIDIA 將報廢 PCBA 做成尺的案例，希望有「報廢品直接看得見」的產品（例如 PCBA 放入透明杯墊）。",
+        details: [
+          "中國有大量報廢鋁金屬筆殼，希望去化並做成產品。",
+          "另有一大批 PC+ABS 再生塑膠粒子過剩要報廢，主要在中國與越南（中國尤多）。若能在中國就地去化成再生產品，最符合客戶需求。"
         ],
-        update: "對方比價後認為我方價格偏高，要求降價 10%。",
-        risk: "有流失風險，建議副總出面與對方高層洽談。"
+        link: { label: "NVIDIA PCBA 尺參考圖", url: "https://zigsow.jp/item/346859/review/354093/image/mi_122585_1542643937_295665974.jpg" },
+        next: "評估 PCBA 入透明杯墊等可行產品；評估鋁筆殼與 PC+ABS 粒子的中國在地去化方案。",
+        change: "new"
       }
     ],
+    keyClients: [],
+    keyClientsNote: "本週無特別需要報告的項目。",
     labels: [
-      { item: "產品 Y（再生 PET 片材）", stage: 3, expected: "2026/11", owner: "Kayla", note: "審查中，主管機關要求補充來源證明", change: "same" },
-      { item: "產品 W（再生 PP 粒）", stage: 2, expected: "2026/12", owner: "Sam", note: "本週已送件", change: "up" },
-      { item: "產品 V（再生 HDPE 粒）", stage: 1, expected: "2027/Q1", owner: "Sam", note: "整理第三方檢測報告中", change: "new" },
-      { item: "產品 U（再生 PVC 地板）", stage: 5, expected: "已核發", owner: "Kayla", note: "9/10 取得證書", change: "done" }
+      {
+        item: "HDPE 瓶器", stage: 1, expected: "待定", owner: "Kayla",
+        note: "原 2-1 塑膠容器類別僅限有繳回收處理費的製造業者可申請，品牌販售業者不符資格。改以「循環材料＋可重複填充」走個案申請。",
+        change: "new"
+      },
+      {
+        item: "雨傘", stage: 1, expected: "待定", owner: "Kayla",
+        note: "承辦原認定再生塑膠佔整支重量比例過低，不符條件。會中科長表示：若傘面使用再生塑膠且提供一定保固年限（如一年），可認定為「具可維修延長使用性質」，即具申請資格。",
+        change: "new"
+      },
+      {
+        item: "PVC 地板（與文康合作）", stage: 1, expected: "待定", owner: "Kayla",
+        note: "會上科長點名 PVC 產品仍不符資格。會後私下確認：若確定 100% PVC 不摻其他塑膠，且可 100% 去化再製，可嘗試送個案申請；因無前例，具備「第三方驗證」與「已有客戶執行的成熟商業模式」兩條件時通過機率較高。",
+        change: "new"
+      }
     ],
+    labelsNotes: {
+      title: "環境部循環標誌個案申請說明會重點",
+      items: [
+        "8/31 起開放原公告五大類以外的產品個案申請。",
+        "可個案申請的產品，其循環特性須屬「具可維修延長使用性質」，應符合下列之一：(1) 提供使用過之物品回收服務 (2) 重複填充 (3) 提供租賃、押金回收或回購服務 (4) 提供維修服務及設置維修點 (5) 提供一定保固年限 (6) 其他經環境部認可之方式。",
+        "個案申請需提供非常詳細的申請文件，流程：顧問團預審 → 專家學者書面審查 → 若品項複雜、無銷售實績或無第三方驗證，需再經審查會議（申請者須列席說明）→ 確定通過或補件後通過。"
+      ],
+      links: [
+        { label: "說明會簡報（Google Drive）", url: "https://drive.google.com/drive/folders/1OJPJVUYM9NHbP4EEm64dcrHBJbz9LYMT" }
+      ]
+    },
     ai: [
       {
-        name: "AI 報價助理", progress: 60,
-        done: ["完成報價規則整理與第一版 prompt", "串接產品資料庫"],
-        next: ["內部業務試用一週", "收集回饋修正"],
+        name: "客戶開發優化與需求分析", progress: 0,
+        done: [],
+        next: [
+          "盤點新客戶開發流程中可優化的環節",
+          "利用開發中及既有客戶資料，分析客戶需求與開發調整方向"
+        ],
         blockers: "", need: ""
       },
       {
-        name: "客戶開發線索自動整理", progress: 35,
-        done: ["完成展會名單匯入格式", "測試自動分類產業別"],
-        next: ["加入 CRM 同步"],
-        blockers: "CRM API 權限尚未開通", need: "需 IT 協助開 API 權限"
-      },
-      {
-        name: "碳足跡計算小工具", progress: 85,
-        done: ["完成計算邏輯驗證", "UI 調整"],
-        next: ["提供 Y 客戶試用"],
+        name: "循環服務成本報價系統", progress: 0,
+        done: [],
+        next: [
+          "下階段：釐清循環服務的成本報價規劃",
+          "規劃確定後進行系統開發"
+        ],
         blockers: "", need: ""
       }
-    ]
-  },
-  {
-    week: "2026-W37",
-    range: "2026/09/07 – 09/11",
-    updated: "2026/09/07",
-    highlights: [
-      "示範資料：上週版本，用來測試週次切換。",
-      "示範資料：產品 U 循環標誌核發。"
-    ],
-    decisions: [],
-    prospects: [
-      { name: "A 公司", industry: "家電", stage: 3, owner: "Kayla", update: "報價送出", next: "議約", change: "up" },
-      { name: "B 公司", industry: "包材", stage: 3, owner: "Kayla", update: "報價準備中", next: "送出報價", change: "same" },
-      { name: "C 公司", industry: "汽車零件", stage: 1, owner: "Sam", update: "初次接觸", next: "提案", change: "new" },
-      { name: "F 公司", industry: "電子", stage: 2, owner: "Sam", update: "提案中", next: "等回覆", change: "same" }
-    ],
-    keyClients: [
-      {
-        client: "X 客戶", project: "再生 PP 料導入量產", status: "green", progress: 55,
-        milestones: [
-          { name: "樣品認證", done: true }, { name: "小量試產", done: true },
-          { name: "量產驗證", done: false }, { name: "正式供貨", done: false }
-        ],
-        update: "小量試產完成。", risk: "無"
-      }
-    ],
-    labels: [
-      { item: "產品 Y（再生 PET 片材）", stage: 3, expected: "2026/11", owner: "Kayla", note: "審查中", change: "same" },
-      { item: "產品 U（再生 PVC 地板）", stage: 5, expected: "已核發", owner: "Kayla", note: "取得證書", change: "done" }
-    ],
-    ai: [
-      { name: "AI 報價助理", progress: 45, done: ["整理報價規則"], next: ["串接產品資料庫"], blockers: "", need: "" }
     ]
   }
 ];
