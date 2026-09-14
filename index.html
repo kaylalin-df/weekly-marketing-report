@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>行銷週報 Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f4f1;
+    --surface: #ffffff;
+    --line: #e2e1dc;
+    --ink: #0b0b0b;
+    --ink-2: #52514e;
+    --ink-3: #8a8983;
+    --accent: #2a78d6;
+    --accent-soft: #e6f0fb;
+    --good: #0ca30c;
+    --warn: #e09a00;
+    --crit: #d03b3b;
+    --good-soft: #e8f6e8;
+    --warn-soft: #fff4dc;
+    --crit-soft: #fbe7e7;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; }
+  html { color-scheme: light; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+    font-size: 15px; line-height: 1.55;
+  }
+  a { color: var(--accent); }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--surface); border-bottom: 1px solid var(--line);
+  }
+  .bar {
+    max-width: 1180px; margin: 0 auto; padding: 12px 20px;
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  }
+  .brand { font-weight: 700; font-size: 18px; letter-spacing: .02em; }
+  .brand small { display: block; font-weight: 400; font-size: 12px; color: var(--ink-3); }
+  nav { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+  nav a {
+    text-decoration: none; color: var(--ink-2); font-size: 13px;
+    padding: 6px 10px; border-radius: 8px;
+  }
+  nav a:hover { background: var(--bg); color: var(--ink); }
+  .week-select {
+    display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2);
+  }
+  select {
+    font: inherit; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--surface); color: var(--ink);
+  }
+
+  /* ---------- layout ---------- */
+  main { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+  section { margin-top: 36px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+  .sec-head h2 { margin: 0; font-size: 20px; font-weight: 700; }
+  .sec-head .num {
+    width: 30px; height: 30px; border-radius: 8px; background: var(--ink); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
+    align-self: center;
+  }
+  .sec-head .hint { color: var(--ink-3); font-size: 13px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .grid { display: grid; gap: 14px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+  /* ---------- summary ---------- */
+  .summary-title { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+  .summary-title h1 { margin: 0; font-size: 26px; font-weight: 700; }
+  .summary-title .range { color: var(--ink-2); }
+  .summary-title .updated { color: var(--ink-3); font-size: 13px; margin-left: auto; }
+  .card h3 { margin: 0 0 10px; font-size: 14px; font-weight: 700; color: var(--ink-2); letter-spacing: .04em; text-transform: uppercase; }
+  ul.clean { margin: 0; padding-left: 20px; }
+  ul.clean li { margin: 6px 0; }
+  .decision { display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+  .decision:first-of-type { border-top: 0; padding-top: 0; }
+  .decision .flag {
+    flex: none; width: 8px; border-radius: 4px; background: var(--crit);
+  }
+  .decision b { display: block; }
+  .decision .detail { color: var(--ink-2); font-size: 14px; }
+  .decision .due { color: var(--ink-3); font-size: 13px; margin-left: auto; flex: none; }
+  .empty { color: var(--ink-3); font-style: normal; }
+
+  /* ---------- stat tiles ---------- */
+  .tiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 14px; }
+  .tile {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+    position: relative; overflow: hidden;
+  }
+  .tile::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); opacity: var(--op, 1); }
+  .tile .k { font-size: 12px; color: var(--ink-2); }
+  .tile .v { font-size: 26px; font-weight: 700; line-height: 1.2; }
+  .tile .s { font-size: 12px; color: var(--ink-3); }
+  @media (max-width: 720px) { .tiles { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); } }
+
+  /* ---------- table ---------- */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 10px; border-top: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--ink-2); font-weight: 500; font-size: 13px; border-top: 0; white-space: nowrap; }
+  td.name { font-weight: 700; white-space: nowrap; }
+  td.muted { color: var(--ink-2); }
+
+  /* ---------- stage bars ---------- */
+  .stages { display: flex; gap: 3px; }
+  .stages i {
+    height: 8px; flex: 1; border-radius: 3px; background: var(--line); display: block; min-width: 14px;
+  }
+  .stages i.on { background: var(--accent); }
+  .stage-label { font-size: 12px; color: var(--ink-2); margin-top: 4px; white-space: nowrap; }
+  .stage-cell { min-width: 150px; }
+
+  /* ---------- chips ---------- */
+  .chip {
+    display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px;
+    font-size: 12px; font-weight: 500; white-space: nowrap; border: 1px solid transparent;
+  }
+  .chip-new  { background: var(--accent-soft); color: #1c5cab; }
+  .chip-up   { background: var(--good-soft); color: #0a6a0a; }
+  .chip-down { background: var(--crit-soft); color: #a02c2c; }
+  .chip-done { background: #ececea; color: var(--ink-2); }
+  .chip-same { color: var(--ink-3); border-color: var(--line); }
+
+  /* ---------- status light ---------- */
+  .light { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; }
+  .light::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 20%, transparent); }
+  .light-green { --c: var(--good); color: #0a6a0a; }
+  .light-yellow { --c: var(--warn); color: #8a5e00; }
+  .light-red { --c: var(--crit); color: #a02c2c; }
+
+  /* ---------- client / ai cards ---------- */
+  .kc-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+  .kc-head .t { font-weight: 700; font-size: 16px; }
+  .kc-head .p { color: var(--ink-2); font-size: 14px; }
+  .kc-head .light { margin-left: auto; flex: none; }
+  .progress { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; margin: 6px 0 10px; }
+  .progress i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
+  .progress.green i { background: var(--good); }
+  .progress.yellow i { background: var(--warn); }
+  .progress.red i { background: var(--crit); }
+  .pct { font-size: 13px; color: var(--ink-2); display: flex; justify-content: space-between; }
+  .pct b { color: var(--ink); }
+  .ms { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .ms span { font-size: 12px; padding: 3px 9px; border-radius: 6px; border: 1px solid var(--line); color: var(--ink-3); }
+  .ms span.done { background: var(--good-soft); border-color: transparent; color: #0a6a0a; }
+  .ms span.done::before { content: "✓ "; }
+  .kv { font-size: 14px; margin-top: 6px; }
+  .kv b { color: var(--ink-2); font-weight: 500; margin-right: 6px; }
+  .kv.risk b { color: #a02c2c; }
+  .ai-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+  .ai-lists h4 { margin: 0 0 4px; font-size: 12px; color: var(--ink-3); font-weight: 500; letter-spacing: .04em; }
+  .ai-lists ul { margin: 0; padding-left: 18px; font-size: 14px; }
+  .ai-lists li { margin: 3px 0; }
+  .blocker {
+    margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--warn-soft);
+    font-size: 13px; color: #8a5e00;
+  }
+  .blocker b { font-weight: 700; }
+
+  footer { max-width: 1180px; margin: 0 auto; padding: 0 20px 30px; color: var(--ink-3); font-size: 12px; }
+
+  @media print {
+    header { position: static; }
+    nav, .week-select { display: none; }
+    body { background: #fff; }
+    .card, .tile { break-inside: avoid; }
+    section { margin-top: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <div class="brand">行銷週報 Dashboard<small>Marketing Weekly Report</small></div>
+    <nav>
+      <a href="#summary">摘要</a>
+      <a href="#prospects">客戶開發</a>
+      <a href="#clients">重點客戶</a>
+      <a href="#labels">循環標誌</a>
+      <a href="#ai">AI 開發</a>
+    </nav>
+    <label class="week-select">週次
+      <select id="weekSelect"></select>
+    </label>
+  </div>
+</header>
+
+<main id="app"></main>
+<footer>資料檔：data/weeks.js ・ 每週一更新</footer>
+
+<script src="data/weeks.js"></script>
+<script>
+(function () {
+  const DATA = window.WEEKLY_DATA || [];
+  const PROSPECT_STAGES = ["接觸", "提案", "報價", "議約", "成交"];
+  const LABEL_STAGES = ["資料準備", "送件", "審查", "補件", "核發"];
+  const CHANGE = {
+    new:  ["chip-new",  "新增"],
+    up:   ["chip-up",   "▲ 推進"],
+    down: ["chip-down", "▼ 退回"],
+    done: ["chip-done", "完成"],
+    same: ["chip-same", "持平"]
+  };
+  const STATUS = { green: "順利", yellow: "需關注", red: "有風險" };
+
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const chip = c => { const [cls, t] = CHANGE[c] || CHANGE.same; return `<span class="chip ${cls}">${t}</span>`; };
+  const stages = (n, list) => `<div class="stage-cell"><div class="stages">${list.map((_, i) => `<i class="${i < n ? "on" : ""}"></i>`).join("")}</div><div class="stage-label">${n}/${list.length} ${esc(list[n - 1] || "")}</div></div>`;
+  const li = arr => (arr && arr.length) ? `<ul class="clean">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<div class="empty">無</div>`;
+
+  function secHead(num, title, hint) {
+    return `<div class="sec-head"><span class="num">${num}</span><h2>${title}</h2><span class="hint">${hint || ""}</span></div>`;
+  }
+
+  function render(w) {
+    const app = document.getElementById("app");
+    if (!w) { app.innerHTML = `<p class="empty">尚無資料</p>`; return; }
+
+    // ---- summary ----
+    const decisions = (w.decisions && w.decisions.length)
+      ? w.decisions.map(d => `<div class="decision"><span class="flag"></span><div><b>${esc(d.title)}</b><span class="detail">${esc(d.detail)}</span></div><span class="due">${d.due ? "期限 " + esc(d.due) : ""}</span></div>`).join("")
+      : `<div class="empty">本週無待決事項</div>`;
+
+    let html = `
+      <section id="summary" style="margin-top:0">
+        <div class="summary-title">
+          <h1>${esc(w.week)}</h1><span class="range">${esc(w.range)}</span>
+          <span class="updated">更新：${esc(w.updated)}</span>
+        </div>
+        <div class="grid grid-2">
+          <div class="card"><h3>本週重點</h3>${li(w.highlights)}</div>
+          <div class="card"><h3>需副總決策</h3>${decisions}</div>
+        </div>
+      </section>`;
+
+    // ---- 1. prospects ----
+    const ps = w.prospects || [];
+    const counts = PROSPECT_STAGES.map((_, i) => ps.filter(p => p.stage === i + 1).length);
+    html += `
+      <section id="prospects">
+        ${secHead(1, "客戶開發進度", `共 ${ps.length} 家潛在客戶`)}
+        <div class="tiles">${PROSPECT_STAGES.map((s, i) => `<div class="tile" style="--op:${0.35 + i * 0.16}"><div class="k">${s}</div><div class="v">${counts[i]}</div><div class="s">家</div></div>`).join("")}</div>
+        <div class="card table-wrap">
+          <table>
+            <thead><tr><th>客戶</th><th>產業</th><th>階段</th><th>負責人</th><th>本週進展</th><th>下一步</th><th>變化</th></tr></thead>
+            <tbody>${ps.length ? ps.map(p => `<tr>
+              <td class="name">${esc(p.name)}</td><td class="muted">${esc(p.industry)}</td>
+              <td>${stages(p.stage, PROSPECT_STAGES)}</td><td class="muted">${esc(p.owner)}</td>
+              <td>${esc(p.update)}</td><td>${esc(p.next)}</td><td>${chip(p.change)}</td></tr>`).join("")
+              : `<tr><td colspan="7" class="empty">無</td></tr>`}
+            </tbody>
+          </table>
+        </div>
+      </section>`;
+
+    // ---- 2. key clients ----
+    const kc = w.keyClients || [];
+    html += `
+      <section id="clients">
+        ${secHead(2, "既有重點客戶專案報告", `${kc.length} 個專案`)}
+        <div class="grid grid-3">${kc.map(c => `
+          <div class="card">
+            <div class="kc-head"><div><div class="t">${esc(c.client)}</div><div class="p">${esc(c.project)}</div></div>
+              <span class="light light-${c.status}">${STATUS[c.status] || ""}</span></div>
+            <div class="pct"><span>整體進度</span><b>${c.progress}%</b></div>
+            <div class="progress ${c.status}"><i style="width:${c.progress}%"></i></div>
+            <div class="ms">${(c.milestones || []).map(m => `<span class="${m.done ? "done" : ""}">${esc(m.name)}</span>`).join("")}</div>
+            <div class="kv"><b>本週</b>${esc(c.update)}</div>
+            <div class="kv risk"><b>風險</b>${esc(c.risk || "無")}</div>
+          </div>`).join("") || `<div class="card empty">無</div>`}
+        </div>
+      </section>`;
+
+    // ---- 3. labels ----
+    const lb = w.labels || [];
+    html += `
+      <section id="labels">
+        ${secHead(3, "循環標誌申請進度", `${lb.length} 件申請`)}
+        <div class="card table-wrap">
+          <table>
+            <thead><tr><th>申請項目</th><th>階段</th><th>預計完成</th><th>負責人</th><th>說明</th><th>變化</th></tr></thead>
+            <tbody>${lb.length ? lb.map(l => `<tr>
+              <td class="name">${esc(l.item)}</td><td>${stages(l.stage, LABEL_STAGES)}</td>
+              <td class="muted">${esc(l.expected)}</td><td class="muted">${esc(l.owner)}</td>
+              <td>${esc(l.note)}</td><td>${chip(l.change)}</td></tr>`).join("")
+              : `<tr><td colspan="6" class="empty">無</td></tr>`}
+            </tbody>
+          </table>
+        </div>
+      </section>`;
+
+    // ---- 4. AI ----
+    const ai = w.ai || [];
+    html += `
+      <section id="ai">
+        ${secHead(4, "AI 開發進度", `${ai.length} 個專案`)}
+        <div class="grid grid-3">${ai.map(a => `
+          <div class="card">
+            <div class="kc-head"><div class="t">${esc(a.name)}</div></div>
+            <div class="pct"><span>完成度</span><b>${a.progress}%</b></div>
+            <div class="progress"><i style="width:${a.progress}%"></i></div>
+            <div class="ai-lists">
+              <div><h4>本週完成</h4>${li(a.done)}</div>
+              <div><h4>下週計畫</h4>${li(a.next)}</div>
+            </div>
+            ${(a.blockers || a.need) ? `<div class="blocker">${a.blockers ? `<b>阻礙：</b>${esc(a.blockers)}` : ""}${a.blockers && a.need ? "<br>" : ""}${a.need ? `<b>需要：</b>${esc(a.need)}` : ""}</div>` : ""}
+          </div>`).join("") || `<div class="card empty">無</div>`}
+        </div>
+      </section>`;
+
+    app.innerHTML = html;
+  }
+
+  const sel = document.getElementById("weekSelect");
+  DATA.forEach((w, i) => { const o = document.createElement("option"); o.value = i; o.textContent = `${w.week}（${w.range}）`; sel.appendChild(o); });
+  const fromHash = DATA.findIndex(w => "#" + w.week === location.hash);
+  sel.value = fromHash >= 0 ? fromHash : 0;
+  sel.addEventListener("change", () => { render(DATA[sel.value]); history.replaceState(null, "", "#" + DATA[sel.value].week); });
+  render(DATA[sel.value]);
+})();
+</script>
+</body>
+</html>
