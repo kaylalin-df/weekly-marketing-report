@@ -82,6 +82,8 @@
   .sec-head h2 { margin: 0; font-size: 21px; font-weight: 700; }
   .sec-head .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: #fff; }
   .sec-head .hint { color: var(--ink-3); font-size: 13px; }
+  .sec-link { font-size: 13px; text-decoration: none; color: var(--blue); background: var(--blue-soft); padding: 4px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 5px; }
+  .sec-link:hover { background: #d3e3f8; }
   .c-blue .ic { background: var(--blue); }  .c-green .ic { background: var(--green); }
   .c-teal .ic { background: var(--teal); }  .c-violet .ic { background: var(--violet); }
   .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
@@ -266,7 +268,8 @@
   const notes = (n, color) => n ? `<div class="card notes"><h3>${I.info} ${esc(n.title || "補充說明")}</h3>${n.items ? li(n.items) : ""}${n.conditions ? cond(n.conditions) : ""}${n.flow ? flow(n.flow) : ""}${(n.links || []).map(link).join("")}</div>` : "";
   const flow = f => `<div class="flow">${f.map(x => `<div class="node"><b>${esc(x.step)}</b>${esc(x.desc || "")}</div>`).join("")}</div>`;
   const cond = c => `<div class="cond">${c.map((x, i) => `<div><span>${i + 1}</span>${esc(x)}</div>`).join("")}</div>`;
-  const secHead = (cls, icon, title, hint, id) => `<div class="sec-head ${cls}" id="${id}"><span class="ic">${icon}</span><h2>${title}</h2><span class="hint">${hint || ""}</span></div>`;
+  const secHead = (cls, icon, title, hint, id, extra) => `<div class="sec-head ${cls}" id="${id}"><span class="ic">${icon}</span><h2>${title}</h2>${hint ? `<span class="hint">${hint}</span>` : ""}${extra || ""}</div>`;
+  const PROSPECT_DASHBOARD = "https://dafon-mk.github.io/weekly-report/";
   const ring = (pct) => { const r = 40, c = 2 * Math.PI * r; return `<div class="ring"><svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="${r}" stroke="#ebe6fb" stroke-width="10" fill="none"/><circle cx="48" cy="48" r="${r}" stroke="#6a4fd8" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - pct / 100)}"/></svg><div class="num">${pct}%</div></div>`; };
 
   document.getElementById("logoIc").innerHTML = I.logo;
@@ -293,7 +296,7 @@
     let html = "";
 
     // ---- 1. prospects ----
-    html += `<section>${secHead("c-blue", I.users, "客戶開發進度", `${ps.length} 家潛在客戶`, "prospects")}<div class="grid">`;
+    html += `<section>${secHead("c-blue", I.users, "客戶開發進度", "", "prospects", `<a class="sec-link" href="${PROSPECT_DASHBOARD}" target="_blank" rel="noopener">${I.link} 開發 dashboard</a>`)}<div class="grid">`;
     html += ps.map((p, i) => `
       <div class="card pcard">
         <div class="side">
