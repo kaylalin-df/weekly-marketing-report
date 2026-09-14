@@ -53,7 +53,7 @@ window.WEEKLY_DATA = [
         change: "new"
       },
       {
-        name: "瀚克寶寶", industry: "嬰兒副食品", stage: 4,
+        name: "瀚克寶寶", industry: "嬰兒副食品", stage: 3,
         update: "冷凍副食品品牌，旗下高端品牌 QBEBE 是台灣第一家通過有機驗證的嬰幼兒副食品品牌。門市自主回收 PP 容器一年多，回收後無出路，找我們合作補上「再製」這一段。",
         topics: [
           { title: "客戶背景", tag: "主管參考", tagType: "wait", points: [
