@@ -96,7 +96,7 @@ window.WEEKLY_DATA = [
         change: "new"
       },
       {
-        group: "個案申請評估中", item: "PVC 地板（與文康合作）", stage: 1, expected: "待定",
+        group: "個案申請評估中", item: "PVC 地板", stage: 1, expected: "待定",
         note: "會上點名 PVC 仍不符資格；會後私詢科長取得可嘗試的條件。",
         details: [
           "前提：100% PVC 不摻其他塑膠，且可 100% 去化再製",
