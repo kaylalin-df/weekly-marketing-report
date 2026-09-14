@@ -58,11 +58,6 @@ window.WEEKLY_DATA = [
     keyClientsNote: "本週無特別需要報告的項目。",
 
     labels: [
-      { group: "rPP 產品線（五項）", item: "rPP 再生布料－單紗", stage: 1, expected: "待定", note: "樣品已送塑膠中心檢驗材質。布料碼重待廠商提供。", change: "up" },
-      { group: "rPP 產品線（五項）", item: "rPP 再生布料－複紗", stage: 1, expected: "待定", note: "樣品已送塑膠中心檢驗材質。布料碼重待廠商提供。", change: "up" },
-      { group: "rPP 產品線（五項）", item: "rPP 循環掛繩", stage: 1, expected: "待定", note: "樣品已送塑膠中心檢驗材質。", change: "up" },
-      { group: "rPP 產品線（五項）", item: "rPP 識別證套", stage: 1, expected: "待定", note: "樣品已送塑膠中心檢驗材質。", change: "up" },
-      { group: "rPP 產品線（五項）", item: "rPP 名片盒", stage: 1, expected: "待定", note: "樣品已送塑膠中心檢驗材質。", change: "up" },
       {
         group: "個案申請評估中", item: "HDPE 瓶器", stage: 1, expected: "待定",
         note: "原「塑膠容器」類別僅限繳回收處理費的製造業者申請，品牌販售業者不符。",
@@ -84,7 +79,12 @@ window.WEEKLY_DATA = [
           "待討論：是否與文康投入第三方驗證後送件"
         ],
         change: "new"
-      }
+      },
+      { group: "rPP 產品線（五項）", item: "rPP 再生布料－單紗", stage: 1, expected: "待定", note: "樣品已送塑膠中心檢驗材質。布料碼重待廠商提供。", change: "up" },
+      { group: "rPP 產品線（五項）", item: "rPP 再生布料－複紗", stage: 1, expected: "待定", note: "樣品已送塑膠中心檢驗材質。布料碼重待廠商提供。", change: "up" },
+      { group: "rPP 產品線（五項）", item: "rPP 循環掛繩", stage: 1, expected: "待定", note: "樣品已送塑膠中心檢驗材質。", change: "up" },
+      { group: "rPP 產品線（五項）", item: "rPP 識別證套", stage: 1, expected: "待定", note: "樣品已送塑膠中心檢驗材質。", change: "up" },
+      { group: "rPP 產品線（五項）", item: "rPP 名片盒", stage: 1, expected: "待定", note: "樣品已送塑膠中心檢驗材質。", change: "up" }
     ],
     labelsNotes: {
       title: "本週申請作業進度與環境部說明會重點",

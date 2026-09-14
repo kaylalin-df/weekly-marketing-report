@@ -328,6 +328,7 @@
     const groups = [];
     lb.forEach(l => { const g = l.group || ""; let x = groups.find(y => y.name === g); if (!x) { x = { name: g, items: [] }; groups.push(x); } x.items.push(l); });
     html += `<section>${secHead("c-teal", I.recycle, "循環標誌申請進度", `${lb.length} 件申請`, "labels")}`;
+    html += notes(w.labelsNotes).replace('class="card notes"', 'class="card notes" style="margin:0 0 18px"');
     html += groups.map(g => `
       <div class="lgroup">${g.name ? `<div class="lgroup-title">${I.tag} ${esc(g.name)}</div>` : ""}
         <div class="grid grid-3">${g.items.map(l => `
@@ -338,7 +339,7 @@
           </div>`).join("")}
         </div>
       </div>`).join("") || `<div class="card empty">無</div>`;
-    html += `${notes(w.labelsNotes)}</section>`;
+    html += `</section>`;
 
     // ---- 4. AI ----
     html += `<section>${secHead("c-violet", I.cpu, "AI 開發進度", `${ai.length} 個專案`, "ai")}<div class="grid grid-2">`;
