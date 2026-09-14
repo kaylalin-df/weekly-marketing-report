@@ -5,208 +5,213 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>行銷週報 Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f4f4f1;
+    --bg: #f3f4f0;
     --surface: #ffffff;
-    --line: #e2e1dc;
-    --ink: #0b0b0b;
-    --ink-2: #52514e;
-    --ink-3: #8a8983;
-    --accent: #2a78d6;
-    --accent-soft: #e6f0fb;
-    --good: #0ca30c;
-    --warn: #e09a00;
-    --crit: #d03b3b;
-    --good-soft: #e8f6e8;
-    --warn-soft: #fff4dc;
-    --crit-soft: #fbe7e7;
-    --radius: 12px;
+    --line: #e3e3dd;
+    --ink: #0f1311;
+    --ink-2: #4f5551;
+    --ink-3: #8b918c;
+    --blue: #2a78d6;  --blue-soft: #e4eefb;
+    --green: #128a4a; --green-soft: #e2f4ea;
+    --teal: #0f8f8a;  --teal-soft: #dff3f2;
+    --violet: #6a4fd8; --violet-soft: #ebe6fb;
+    --amber: #d98a00; --amber-soft: #fff3d9;
+    --red: #d03b3b;   --red-soft: #fbe6e6;
+    --good: #0ca30c; --warn: #e09a00; --crit: #d03b3b;
+    --radius: 14px;
   }
   * { box-sizing: border-box; }
-  html { color-scheme: light; }
+  html { color-scheme: light; scroll-behavior: smooth; }
   body {
     margin: 0; background: var(--bg); color: var(--ink);
     font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
-    font-size: 15px; line-height: 1.55;
+    font-size: 15px; line-height: 1.6;
   }
-  a { color: var(--accent); }
+  a { color: var(--blue); }
+  svg { display: inline-block; vertical-align: middle; }
 
   /* ---------- header ---------- */
-  header {
-    position: sticky; top: 0; z-index: 10;
-    background: var(--surface); border-bottom: 1px solid var(--line);
-  }
-  .bar {
-    max-width: 1180px; margin: 0 auto; padding: 12px 20px;
-    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-  }
-  .brand { font-weight: 700; font-size: 18px; letter-spacing: .02em; }
-  .brand small { display: block; font-weight: 400; font-size: 12px; color: var(--ink-3); }
-  nav { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
-  nav a {
-    text-decoration: none; color: var(--ink-2); font-size: 13px;
-    padding: 6px 10px; border-radius: 8px;
-  }
+  header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar { max-width: 1180px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; }
+  .brand .logo { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, var(--teal), var(--blue)); display: grid; place-items: center; color: #fff; }
+  .brand small { display: block; font-weight: 400; font-size: 11px; color: var(--ink-3); line-height: 1.2; }
+  nav { display: flex; gap: 2px; flex-wrap: wrap; margin-left: auto; }
+  nav a { text-decoration: none; color: var(--ink-2); font-size: 13px; padding: 6px 10px; border-radius: 8px; display: inline-flex; align-items: center; gap: 5px; }
   nav a:hover { background: var(--bg); color: var(--ink); }
-  .week-select {
-    display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2);
+  .week-select { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
+  select { font: inherit; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    max-width: 1180px; margin: 22px auto 0; padding: 0 20px;
   }
-  select {
-    font: inherit; padding: 6px 10px; border: 1px solid var(--line); border-radius: 8px;
-    background: var(--surface); color: var(--ink);
+  .hero-card {
+    position: relative; overflow: hidden; border-radius: 18px; padding: 26px 28px;
+    background: linear-gradient(120deg, #0f3d5c 0%, #0f8f8a 60%, #35b28a 100%); color: #fff;
   }
+  .hero-card::after {
+    content: ""; position: absolute; right: -60px; top: -80px; width: 320px; height: 320px; border-radius: 50%;
+    background: rgba(255,255,255,.08);
+  }
+  .hero-card::before {
+    content: ""; position: absolute; right: 120px; bottom: -140px; width: 260px; height: 260px; border-radius: 50%;
+    background: rgba(255,255,255,.06);
+  }
+  .hero-card .eyebrow { font-size: 12px; letter-spacing: .12em; opacity: .8; text-transform: uppercase; }
+  .hero-card h1 { margin: 2px 0 4px; font-size: 32px; font-weight: 900; letter-spacing: .01em; }
+  .hero-card .range { opacity: .9; }
+  .hero-card .updated { position: absolute; right: 24px; top: 22px; font-size: 12px; opacity: .8; }
+  .hero-art { position: absolute; right: 36px; bottom: 10px; opacity: .9; }
+  @media (max-width: 720px) { .hero-art { display: none; } }
+  .hero-nav { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; position: relative; }
+  .hero-nav a {
+    color: #fff; text-decoration: none; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25);
+    padding: 8px 12px; border-radius: 10px; font-size: 13px; display: inline-flex; gap: 8px; align-items: center;
+  }
+  .hero-nav a b { font-weight: 700; }
+  .hero-nav a span { opacity: .8; }
 
   /* ---------- layout ---------- */
-  main { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
-  section { margin-top: 36px; }
-  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
-  .sec-head h2 { margin: 0; font-size: 20px; font-weight: 700; }
-  .sec-head .num {
-    width: 30px; height: 30px; border-radius: 8px; background: var(--ink); color: #fff;
-    display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px;
-    align-self: center;
-  }
+  main { max-width: 1180px; margin: 0 auto; padding: 8px 20px 64px; }
+  section { margin-top: 40px; }
+  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .sec-head h2 { margin: 0; font-size: 21px; font-weight: 700; }
+  .sec-head .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: #fff; }
   .sec-head .hint { color: var(--ink-3); font-size: 13px; }
-  .card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 18px 20px;
-  }
+  .c-blue .ic { background: var(--blue); }  .c-green .ic { background: var(--green); }
+  .c-teal .ic { background: var(--teal); }  .c-violet .ic { background: var(--violet); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
   .grid { display: grid; gap: 14px; }
   .grid-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
   .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-
-  /* ---------- summary ---------- */
-  .summary-title { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
-  .summary-title h1 { margin: 0; font-size: 26px; font-weight: 700; }
-  .summary-title .range { color: var(--ink-2); }
-  .summary-title .updated { color: var(--ink-3); font-size: 13px; margin-left: auto; }
-  .card h3 { margin: 0 0 10px; font-size: 14px; font-weight: 700; color: var(--ink-2); letter-spacing: .04em; text-transform: uppercase; }
+  .card h3 { margin: 0 0 10px; font-size: 14px; font-weight: 700; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
   ul.clean { margin: 0; padding-left: 20px; }
   ul.clean li { margin: 6px 0; }
-  .decision { display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line); }
-  .decision:first-of-type { border-top: 0; padding-top: 0; }
-  .decision .flag {
-    flex: none; width: 8px; border-radius: 4px; background: var(--crit);
-  }
-  .decision b { display: block; }
-  .decision .detail { color: var(--ink-2); font-size: 14px; }
-  .decision .due { color: var(--ink-3); font-size: 13px; margin-left: auto; flex: none; }
-  .empty { color: var(--ink-3); font-style: normal; }
+  .empty { color: var(--ink-3); }
 
-  /* ---------- stat tiles ---------- */
-  .tiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 14px; }
-  .tile {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
-    position: relative; overflow: hidden;
-  }
-  .tile::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); opacity: var(--op, 1); }
-  .tile .k { font-size: 12px; color: var(--ink-2); }
-  .tile .v { font-size: 26px; font-weight: 700; line-height: 1.2; }
-  .tile .s { font-size: 12px; color: var(--ink-3); }
-  @media (max-width: 720px) { .tiles { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); } }
+  /* ---------- prospect cards ---------- */
+  .pcard { display: grid; grid-template-columns: 220px 1fr; gap: 0; overflow: hidden; padding: 0; }
+  @media (max-width: 760px) { .pcard { grid-template-columns: 1fr; } }
+  .pcard .side { padding: 18px 20px; background: #fafaf8; border-right: 1px solid var(--line); }
+  @media (max-width: 760px) { .pcard .side { border-right: 0; border-bottom: 1px solid var(--line); } }
+  .pcard .body { padding: 18px 20px; }
+  .avatar { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; color: #fff; font-weight: 900; font-size: 20px; margin-bottom: 10px; }
+  .pcard .name { font-weight: 700; font-size: 17px; }
+  .pcard .meta { color: var(--ink-2); font-size: 13px; display: flex; flex-direction: column; gap: 3px; margin-top: 4px; }
+  .pcard .meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .pcard .chip { margin-top: 10px; }
+  .pcard .body p { margin: 0 0 6px; }
+  ul.sub { margin: 4px 0 8px; padding-left: 20px; font-size: 14px; color: var(--ink-2); }
+  ul.sub li { margin: 4px 0; }
+  .next { margin-top: 10px; padding: 10px 12px; background: var(--blue-soft); border-radius: 10px; font-size: 14px; display: flex; gap: 8px; align-items: flex-start; }
+  .next b { color: #1c5cab; flex: none; }
+  .ask { margin-top: 8px; padding: 10px 12px; background: var(--red-soft); border-radius: 10px; font-size: 14px; display: flex; gap: 8px; align-items: flex-start; }
+  .ask b { color: #a02c2c; flex: none; }
+  .ref { font-size: 13px; margin-top: 6px; }
 
-  /* ---------- table ---------- */
-  .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 10px; border-top: 1px solid var(--line); vertical-align: top; }
-  th { color: var(--ink-2); font-weight: 500; font-size: 13px; border-top: 0; white-space: nowrap; }
-  td.name { font-weight: 700; white-space: nowrap; }
-  td.muted { color: var(--ink-2); }
-
-  /* ---------- stage bars ---------- */
-  .stages { display: flex; gap: 3px; }
-  .stages i {
-    height: 8px; flex: 1; border-radius: 3px; background: var(--line); display: block; min-width: 14px;
-  }
-  .stages i.on { background: var(--accent); }
-  .stage-label { font-size: 12px; color: var(--ink-2); margin-top: 4px; white-space: nowrap; }
-  .stage-cell { min-width: 150px; }
+  /* ---------- stepper ---------- */
+  .stepper { display: flex; align-items: flex-start; margin: 12px 0 4px; }
+  .step { flex: 1; text-align: center; position: relative; font-size: 11px; color: var(--ink-3); }
+  .step::before { content: ""; position: absolute; top: 7px; left: 50%; right: -50%; height: 2px; background: var(--line); }
+  .step:last-child::before { display: none; }
+  .step i { position: relative; z-index: 1; display: block; width: 16px; height: 16px; margin: 0 auto 4px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line); }
+  .step.done::before { background: var(--c); }
+  .step.done i { background: var(--c); border-color: var(--c); }
+  .step.cur i { border-color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 22%, transparent); background: var(--surface); }
+  .step.cur { color: var(--ink); font-weight: 700; }
+  .step.done { color: var(--ink-2); }
+  .stepper.sm .step { font-size: 10px; }
+  .stepper.sm .step i { width: 12px; height: 12px; }
+  .stepper.sm .step::before { top: 5px; }
 
   /* ---------- chips ---------- */
-  .chip {
-    display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px;
-    font-size: 12px; font-weight: 500; white-space: nowrap; border: 1px solid transparent;
-  }
-  .chip-new  { background: var(--accent-soft); color: #1c5cab; }
-  .chip-up   { background: var(--good-soft); color: #0a6a0a; }
-  .chip-down { background: var(--crit-soft); color: #a02c2c; }
+  .chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 500; white-space: nowrap; border: 1px solid transparent; }
+  .chip-new  { background: var(--blue-soft); color: #1c5cab; }
+  .chip-up   { background: var(--green-soft); color: #0a6a0a; }
+  .chip-down { background: var(--red-soft); color: #a02c2c; }
   .chip-done { background: #ececea; color: var(--ink-2); }
   .chip-same { color: var(--ink-3); border-color: var(--line); }
 
-  /* ---------- status light ---------- */
+  /* ---------- key client cards ---------- */
   .light { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; }
   .light::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 20%, transparent); }
   .light-green { --c: var(--good); color: #0a6a0a; }
   .light-yellow { --c: var(--warn); color: #8a5e00; }
   .light-red { --c: var(--crit); color: #a02c2c; }
-
-  /* ---------- client / ai cards ---------- */
   .kc-head { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
   .kc-head .t { font-weight: 700; font-size: 16px; }
   .kc-head .p { color: var(--ink-2); font-size: 14px; }
   .kc-head .light { margin-left: auto; flex: none; }
   .progress { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; margin: 6px 0 10px; }
-  .progress i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
-  .progress.green i { background: var(--good); }
-  .progress.yellow i { background: var(--warn); }
-  .progress.red i { background: var(--crit); }
+  .progress i { display: block; height: 100%; background: var(--blue); border-radius: 4px; }
+  .progress.green i { background: var(--good); } .progress.yellow i { background: var(--warn); } .progress.red i { background: var(--crit); }
   .pct { font-size: 13px; color: var(--ink-2); display: flex; justify-content: space-between; }
   .pct b { color: var(--ink); }
   .ms { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
   .ms span { font-size: 12px; padding: 3px 9px; border-radius: 6px; border: 1px solid var(--line); color: var(--ink-3); }
-  .ms span.done { background: var(--good-soft); border-color: transparent; color: #0a6a0a; }
+  .ms span.done { background: var(--green-soft); border-color: transparent; color: #0a6a0a; }
   .ms span.done::before { content: "✓ "; }
   .kv { font-size: 14px; margin-top: 6px; }
   .kv b { color: var(--ink-2); font-weight: 500; margin-right: 6px; }
   .kv.risk b { color: #a02c2c; }
-  .ai-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
-  .ai-lists h4 { margin: 0 0 4px; font-size: 12px; color: var(--ink-3); font-weight: 500; letter-spacing: .04em; }
-  .ai-lists ul { margin: 0; padding-left: 18px; font-size: 14px; }
-  .ai-lists li { margin: 3px 0; }
-  .blocker {
-    margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--warn-soft);
-    font-size: 13px; color: #8a5e00;
-  }
-  .blocker b { font-weight: 700; }
+  .empty-state { display: flex; align-items: center; gap: 18px; color: var(--ink-2); }
+  .empty-state .art { flex: none; width: 72px; height: 72px; border-radius: 20px; background: var(--green-soft); display: grid; place-items: center; color: var(--green); }
 
-  ul.sub { margin: 6px 0 0; padding-left: 18px; font-size: 13px; color: var(--ink-2); }
-  ul.sub li { margin: 3px 0; }
-  .ref { font-size: 13px; margin-top: 6px; }
+  /* ---------- label cards ---------- */
+  .lcard { padding: 16px 18px; display: flex; flex-direction: column; }
+  .lcard .top { display: flex; align-items: flex-start; gap: 10px; }
+  .lcard .icon { flex: none; width: 40px; height: 40px; border-radius: 12px; background: var(--teal-soft); color: var(--teal); display: grid; place-items: center; }
+  .lcard .item { font-weight: 700; font-size: 15px; line-height: 1.3; }
+  .lcard .meta { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+  .lcard .chip { margin-left: auto; flex: none; }
+  .lcard .note { font-size: 13.5px; color: var(--ink-2); margin-top: 8px; }
+  .lgroup { margin-bottom: 14px; }
+  .lgroup-title { font-size: 13px; color: var(--ink-2); font-weight: 700; margin: 0 0 8px 4px; display: flex; align-items: center; gap: 6px; }
+  .flow { display: flex; align-items: stretch; gap: 0; margin: 10px 0 6px; flex-wrap: wrap; }
+  .flow .node { flex: 1; min-width: 150px; background: var(--teal-soft); border-radius: 10px; padding: 10px 12px; font-size: 13px; position: relative; margin-right: 22px; }
+  .flow .node:last-child { margin-right: 0; }
+  .flow .node::after { content: ""; position: absolute; right: -16px; top: 50%; width: 0; height: 0; border-left: 9px solid var(--teal); border-top: 7px solid transparent; border-bottom: 7px solid transparent; transform: translateY(-50%); }
+  .flow .node:last-child::after { display: none; }
+  .flow .node b { display: block; color: var(--teal); font-size: 12px; }
+  .cond { margin-bottom: 4px; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; margin-top: 8px; }
+  .cond div { background: #fafaf8; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font-size: 13px; display: flex; gap: 8px; align-items: center; }
+  .cond div span { flex: none; width: 24px; height: 24px; border-radius: 50%; background: var(--teal); color: #fff; font-size: 12px; font-weight: 700; display: grid; place-items: center; }
   .notes { margin-top: 14px; }
   .notes ul.clean li { margin: 8px 0; }
-  .section-note { color: var(--ink-2); }
+
+  /* ---------- AI cards ---------- */
+  .acard { display: grid; grid-template-columns: 96px 1fr; gap: 16px; }
+  .ring { width: 96px; height: 96px; position: relative; }
+  .ring svg { width: 96px; height: 96px; transform: rotate(-90deg); }
+  .ring .num { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 900; font-size: 20px; color: var(--violet); }
+  .acard .t { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+  .acard .phase { font-size: 12px; color: var(--violet); background: var(--violet-soft); display: inline-block; padding: 2px 8px; border-radius: 999px; margin-bottom: 8px; }
+  .ai-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+  @media (max-width: 480px) { .ai-lists { grid-template-columns: 1fr; } }
+  .ai-lists h4 { margin: 0 0 4px; font-size: 12px; color: var(--ink-3); font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .ai-lists ul { margin: 0; padding-left: 18px; font-size: 14px; }
+  .ai-lists li { margin: 3px 0; }
+  .blocker { margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--amber-soft); font-size: 13px; color: #8a5e00; }
 
   footer { max-width: 1180px; margin: 0 auto; padding: 0 20px 30px; color: var(--ink-3); font-size: 12px; }
-
-  @media print {
-    header { position: static; }
-    nav, .week-select { display: none; }
-    body { background: #fff; }
-    .card, .tile { break-inside: avoid; }
-    section { margin-top: 20px; }
-  }
+  @media print { header { position: static; } nav, .week-select { display: none; } body { background: #fff; } .card { break-inside: avoid; } }
 </style>
 </head>
 <body>
 
 <header>
   <div class="bar">
-    <div class="brand">行銷週報 Dashboard<small>Marketing Weekly Report</small></div>
-    <nav>
-      <a href="#summary">摘要</a>
-      <a href="#prospects">客戶開發</a>
-      <a href="#clients">重點客戶</a>
-      <a href="#labels">循環標誌</a>
-      <a href="#ai">AI 開發</a>
-    </nav>
-    <label class="week-select">週次
-      <select id="weekSelect"></select>
-    </label>
+    <div class="brand"><span class="logo" id="logoIc"></span><span>行銷週報 Dashboard<small>Marketing Weekly Report</small></span></div>
+    <nav id="topnav"></nav>
+    <label class="week-select">週次 <select id="weekSelect"></select></label>
   </div>
 </header>
 
+<div class="hero" id="hero"></div>
 <main id="app"></main>
 <footer>資料檔：data/weeks.js ・ 每週一更新</footer>
 
@@ -216,126 +221,129 @@
   const DATA = window.WEEKLY_DATA || [];
   const PROSPECT_STAGES = ["接觸", "提案", "報價", "議約", "成交"];
   const LABEL_STAGES = ["資料準備", "送件", "審查", "補件", "核發"];
-  const CHANGE = {
-    new:  ["chip-new",  "新增"],
-    up:   ["chip-up",   "▲ 推進"],
-    down: ["chip-down", "▼ 退回"],
-    done: ["chip-done", "完成"],
-    same: ["chip-same", "持平"]
-  };
+  const CHANGE = { new: ["chip-new", "新增"], up: ["chip-up", "▲ 推進"], down: ["chip-down", "▼ 退回"], done: ["chip-done", "完成"], same: ["chip-same", "持平"] };
   const STATUS = { green: "順利", yellow: "需關注", red: "有風險" };
+  const AVATAR_COLORS = ["#2a78d6", "#0f8f8a", "#6a4fd8", "#d98a00", "#c2417a", "#128a4a"];
+
+  // ---- icons (inline SVG, 24px grid) ----
+  const I = {
+    logo: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15.5-6.3L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.3L3 16"/><path d="M3 21v-5h5"/></svg>',
+    users: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    briefcase: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+    recycle: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19H4.8a2 2 0 0 1-1.7-3l1.4-2.5"/><path d="M11 19l-2 2 2 2"/><path d="M7 19h6"/><path d="M14 5l1.1-1.9a2 2 0 0 1 3.5 0L20 5.5"/><path d="M18.5 3.3l2.7-.7-.7 2.7"/><path d="M15.5 8.5l3-5"/><path d="M6.2 12.5L3.5 8a2 2 0 0 1 0-2l1.4-2.4"/><path d="M2.1 5.2l.7-2.7 2.7.7"/><path d="M8.5 12.5l-3-5"/><path d="M17.5 12l2.7 4.5a2 2 0 0 1-1.7 3H16"/><path d="M19.4 20.6l-1.3 2.4-2.4-1.3"/><path d="M15.5 12l3 5"/></svg>',
+    cpu: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>',
+    industry: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M4 20V10l6 4v-4l6 4v-4l4 2.5V20"/><path d="M4 10V4h3v6"/></svg>',
+    user: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    arrow: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>',
+    flag: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4a1 1 0 0 1 1-1h11l-2 4 2 4H5"/></svg>',
+    tag: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>',
+    check: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+    cal: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+    info: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>',
+    link: '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
+    inbox: '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.7 4H7.3a2 2 0 0 0-1.8 1.1z"/></svg>',
+    hero: '<svg width="150" height="120" viewBox="0 0 150 120" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="70" width="22" height="40" rx="3" fill="rgba(255,255,255,.18)"/><rect x="42" y="50" width="22" height="60" rx="3" fill="rgba(255,255,255,.25)"/><rect x="74" y="30" width="22" height="80" rx="3" fill="rgba(255,255,255,.32)"/><rect x="106" y="12" width="22" height="98" rx="3" fill="rgba(255,255,255,.4)"/><path d="M12 60 C40 48, 60 40, 84 24 S120 6, 138 8"/><circle cx="138" cy="8" r="4" fill="#fff"/></svg>'
+  };
 
   const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const chip = c => { const [cls, t] = CHANGE[c] || CHANGE.same; return `<span class="chip ${cls}">${t}</span>`; };
-  const stages = (n, list) => `<div class="stage-cell"><div class="stages">${list.map((_, i) => `<i class="${i < n ? "on" : ""}"></i>`).join("")}</div><div class="stage-label">${n}/${list.length} ${esc(list[n - 1] || "")}</div></div>`;
   const li = arr => (arr && arr.length) ? `<ul class="clean">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<div class="empty">無</div>`;
   const sub = arr => (arr && arr.length) ? `<ul class="sub">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
-  const link = l => l ? `<div class="ref"><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label || "參考連結")} ↗</a></div>` : "";
-  const notes = n => n ? `<div class="card notes"><h3>${esc(n.title || "補充說明")}</h3>${li(n.items)}${(n.links || []).map(link).join("")}</div>` : "";
+  const link = l => l ? `<div class="ref"><a href="${esc(l.url)}" target="_blank" rel="noopener">${I.link} ${esc(l.label || "參考連結")}</a></div>` : "";
+  const stepper = (n, list, color, small) => `<div class="stepper ${small ? "sm" : ""}" style="--c:${color}">${list.map((s, i) => `<div class="step ${i + 1 < n ? "done" : i + 1 === n ? "cur" : ""}"><i></i>${s}</div>`).join("")}</div>`;
+  const notes = (n, color) => n ? `<div class="card notes"><h3>${I.info} ${esc(n.title || "補充說明")}</h3>${n.items ? li(n.items) : ""}${n.conditions ? cond(n.conditions) : ""}${n.flow ? flow(n.flow) : ""}${(n.links || []).map(link).join("")}</div>` : "";
+  const flow = f => `<div class="flow">${f.map(x => `<div class="node"><b>${esc(x.step)}</b>${esc(x.desc || "")}</div>`).join("")}</div>`;
+  const cond = c => `<div class="cond">${c.map((x, i) => `<div><span>${i + 1}</span>${esc(x)}</div>`).join("")}</div>`;
+  const secHead = (cls, icon, title, hint, id) => `<div class="sec-head ${cls}" id="${id}"><span class="ic">${icon}</span><h2>${title}</h2><span class="hint">${hint || ""}</span></div>`;
+  const ring = (pct) => { const r = 40, c = 2 * Math.PI * r; return `<div class="ring"><svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="${r}" stroke="#ebe6fb" stroke-width="10" fill="none"/><circle cx="48" cy="48" r="${r}" stroke="#6a4fd8" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - pct / 100)}"/></svg><div class="num">${pct}%</div></div>`; };
 
-  function secHead(num, title, hint) {
-    return `<div class="sec-head"><span class="num">${num}</span><h2>${title}</h2><span class="hint">${hint || ""}</span></div>`;
-  }
+  document.getElementById("logoIc").innerHTML = I.logo;
+  document.getElementById("topnav").innerHTML = [["#prospects", I.users, "客戶開發"], ["#clients", I.briefcase, "重點客戶"], ["#labels", I.recycle, "循環標誌"], ["#ai", I.cpu, "AI 開發"]]
+    .map(([h, ic, t]) => `<a href="${h}">${ic.replace(/width="22" height="22"/, 'width="14" height="14"')} ${t}</a>`).join("");
 
   function render(w) {
-    const app = document.getElementById("app");
+    const hero = document.getElementById("hero"), app = document.getElementById("app");
     if (!w) { app.innerHTML = `<p class="empty">尚無資料</p>`; return; }
+    const ps = w.prospects || [], kc = w.keyClients || [], lb = w.labels || [], ai = w.ai || [];
 
-    // ---- summary ----
-    const decisions = (w.decisions && w.decisions.length)
-      ? w.decisions.map(d => `<div class="decision"><span class="flag"></span><div><b>${esc(d.title)}</b><span class="detail">${esc(d.detail)}</span></div><span class="due">${d.due ? "期限 " + esc(d.due) : ""}</span></div>`).join("")
-      : `<div class="empty">本週無待決事項</div>`;
+    hero.innerHTML = `<div class="hero-card">
+      <div class="eyebrow">Weekly Marketing Report</div>
+      <h1>${esc(w.week)}</h1><div class="range">${esc(w.range)}</div>
+      <div class="updated">更新：${esc(w.updated)}</div>
+      <div class="hero-art">${I.hero}</div>
+      <div class="hero-nav">
+        <a href="#prospects">${I.users.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${ps.length}</b><span>潛在客戶</span></a>
+        <a href="#clients">${I.briefcase.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${kc.length}</b><span>重點專案</span></a>
+        <a href="#labels">${I.recycle.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${lb.length}</b><span>循環標誌申請</span></a>
+        <a href="#ai">${I.cpu.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${ai.length}</b><span>AI 專案</span></a>
+      </div></div>`;
 
-    let html = `
-      <section id="summary" style="margin-top:0">
-        <div class="summary-title">
-          <h1>${esc(w.week)}</h1><span class="range">${esc(w.range)}</span>
-          <span class="updated">更新：${esc(w.updated)}</span>
-        </div>
-        <div class="grid grid-2">
-          <div class="card"><h3>本週重點</h3>${li(w.highlights)}</div>
-          <div class="card"><h3>需副總決策</h3>${decisions}</div>
-        </div>
-      </section>`;
+    let html = "";
 
     // ---- 1. prospects ----
-    const ps = w.prospects || [];
-    const counts = PROSPECT_STAGES.map((_, i) => ps.filter(p => p.stage === i + 1).length);
-    html += `
-      <section id="prospects">
-        ${secHead(1, "客戶開發進度", `共 ${ps.length} 家潛在客戶`)}
-        <div class="tiles">${PROSPECT_STAGES.map((s, i) => `<div class="tile" style="--op:${0.35 + i * 0.16}"><div class="k">${s}</div><div class="v">${counts[i]}</div><div class="s">家</div></div>`).join("")}</div>
-        <div class="card table-wrap">
-          <table>
-            <thead><tr><th>客戶</th><th>產業</th><th>階段</th><th>負責人</th><th>本週進展</th><th>下一步</th><th>變化</th></tr></thead>
-            <tbody>${ps.length ? ps.map(p => `<tr>
-              <td class="name">${esc(p.name)}</td><td class="muted">${esc(p.industry)}</td>
-              <td>${stages(p.stage, PROSPECT_STAGES)}</td><td class="muted">${esc(p.owner)}</td>
-              <td>${esc(p.update)}${sub(p.details)}${link(p.link)}</td><td>${esc(p.next)}</td><td>${chip(p.change)}</td></tr>`).join("")
-              : `<tr><td colspan="7" class="empty">無</td></tr>`}
-            </tbody>
-          </table>
+    html += `<section>${secHead("c-blue", I.users, "客戶開發進度", `${ps.length} 家潛在客戶`, "prospects")}<div class="grid">`;
+    html += ps.map((p, i) => `
+      <div class="card pcard">
+        <div class="side">
+          <div class="avatar" style="background:${AVATAR_COLORS[i % AVATAR_COLORS.length]}">${esc(p.name.slice(0, 1))}</div>
+          <div class="name">${esc(p.name)}</div>
+          <div class="meta"><span>${I.industry} ${esc(p.industry)}</span><span>${I.user} ${esc(p.owner)}</span></div>
+          ${chip(p.change)}
         </div>
-        ${notes(w.prospectsNotes)}
-      </section>`;
+        <div class="body">
+          ${stepper(p.stage, PROSPECT_STAGES, "var(--blue)")}
+          <p>${esc(p.update)}</p>${sub(p.details)}${link(p.link)}
+          ${p.next ? `<div class="next"><b>${I.arrow} 下一步</b><span>${esc(p.next)}</span></div>` : ""}
+          ${p.ask ? `<div class="ask"><b>${I.flag} 待討論</b><span>${esc(p.ask)}</span></div>` : ""}
+        </div>
+      </div>`).join("") || `<div class="card empty">無</div>`;
+    html += `</div>${notes(w.prospectsNotes)}</section>`;
 
     // ---- 2. key clients ----
-    const kc = w.keyClients || [];
-    html += `
-      <section id="clients">
-        ${secHead(2, "既有重點客戶專案報告", `${kc.length} 個專案`)}
-        <div class="grid grid-3">${kc.map(c => `
-          <div class="card">
-            <div class="kc-head"><div><div class="t">${esc(c.client)}</div><div class="p">${esc(c.project)}</div></div>
-              <span class="light light-${c.status}">${STATUS[c.status] || ""}</span></div>
-            <div class="pct"><span>整體進度</span><b>${c.progress}%</b></div>
-            <div class="progress ${c.status}"><i style="width:${c.progress}%"></i></div>
-            <div class="ms">${(c.milestones || []).map(m => `<span class="${m.done ? "done" : ""}">${esc(m.name)}</span>`).join("")}</div>
-            <div class="kv"><b>本週</b>${esc(c.update)}</div>
-            <div class="kv risk"><b>風險</b>${esc(c.risk || "無")}</div>
-          </div>`).join("") || `<div class="card section-note">${esc(w.keyClientsNote || "本週無特別報告事項")}</div>`}
-        </div>
-        ${notes(w.keyClientsNotes)}
-      </section>`;
+    html += `<section>${secHead("c-green", I.briefcase, "既有重點客戶專案報告", `${kc.length} 個專案`, "clients")}<div class="grid grid-3">`;
+    html += kc.map(c => `
+      <div class="card">
+        <div class="kc-head"><div><div class="t">${esc(c.client)}</div><div class="p">${esc(c.project)}</div></div><span class="light light-${c.status}">${STATUS[c.status] || ""}</span></div>
+        <div class="pct"><span>整體進度</span><b>${c.progress}%</b></div>
+        <div class="progress ${c.status}"><i style="width:${c.progress}%"></i></div>
+        <div class="ms">${(c.milestones || []).map(m => `<span class="${m.done ? "done" : ""}">${esc(m.name)}</span>`).join("")}</div>
+        <div class="kv"><b>本週</b>${esc(c.update)}</div>
+        <div class="kv risk"><b>風險</b>${esc(c.risk || "無")}</div>
+      </div>`).join("") || `<div class="card empty-state"><div class="art">${I.inbox}</div><div>${esc(w.keyClientsNote || "本週無特別報告事項")}</div></div>`;
+    html += `</div>${notes(w.keyClientsNotes)}</section>`;
 
     // ---- 3. labels ----
-    const lb = w.labels || [];
-    html += `
-      <section id="labels">
-        ${secHead(3, "循環標誌申請進度", `${lb.length} 件申請`)}
-        <div class="card table-wrap">
-          <table>
-            <thead><tr><th>申請項目</th><th>階段</th><th>預計完成</th><th>負責人</th><th>說明</th><th>變化</th></tr></thead>
-            <tbody>${lb.length ? lb.map(l => `<tr>
-              <td class="name">${esc(l.item)}</td><td>${stages(l.stage, LABEL_STAGES)}</td>
-              <td class="muted">${esc(l.expected)}</td><td class="muted">${esc(l.owner)}</td>
-              <td>${esc(l.note)}${sub(l.details)}</td><td>${chip(l.change)}</td></tr>`).join("")
-              : `<tr><td colspan="6" class="empty">無</td></tr>`}
-            </tbody>
-          </table>
+    const groups = [];
+    lb.forEach(l => { const g = l.group || ""; let x = groups.find(y => y.name === g); if (!x) { x = { name: g, items: [] }; groups.push(x); } x.items.push(l); });
+    html += `<section>${secHead("c-teal", I.recycle, "循環標誌申請進度", `${lb.length} 件申請`, "labels")}`;
+    html += groups.map(g => `
+      <div class="lgroup">${g.name ? `<div class="lgroup-title">${I.tag} ${esc(g.name)}</div>` : ""}
+        <div class="grid grid-3">${g.items.map(l => `
+          <div class="card lcard">
+            <div class="top"><div class="icon">${I.tag}</div><div><div class="item">${esc(l.item)}</div><div class="meta">${I.cal} 預計 ${esc(l.expected)} ・ ${esc(l.owner)}</div></div>${chip(l.change)}</div>
+            ${stepper(l.stage, LABEL_STAGES, "var(--teal)", true)}
+            <div class="note">${esc(l.note)}${sub(l.details)}</div>
+          </div>`).join("")}
         </div>
-        ${notes(w.labelsNotes)}
-      </section>`;
+      </div>`).join("") || `<div class="card empty">無</div>`;
+    html += `${notes(w.labelsNotes)}</section>`;
 
     // ---- 4. AI ----
-    const ai = w.ai || [];
-    html += `
-      <section id="ai">
-        ${secHead(4, "AI 開發進度", `${ai.length} 個專案`)}
-        <div class="grid grid-3">${ai.map(a => `
-          <div class="card">
-            <div class="kc-head"><div class="t">${esc(a.name)}</div></div>
-            <div class="pct"><span>完成度</span><b>${a.progress}%</b></div>
-            <div class="progress"><i style="width:${a.progress}%"></i></div>
-            <div class="ai-lists">
-              <div><h4>本週完成</h4>${li(a.done)}</div>
-              <div><h4>下週計畫</h4>${li(a.next)}</div>
-            </div>
-            ${(a.blockers || a.need) ? `<div class="blocker">${a.blockers ? `<b>阻礙：</b>${esc(a.blockers)}` : ""}${a.blockers && a.need ? "<br>" : ""}${a.need ? `<b>需要：</b>${esc(a.need)}` : ""}</div>` : ""}
-          </div>`).join("") || `<div class="card section-note">${esc(w.aiNote || "本週無特別報告事項")}</div>`}
+    html += `<section>${secHead("c-violet", I.cpu, "AI 開發進度", `${ai.length} 個專案`, "ai")}<div class="grid grid-2">`;
+    html += ai.map(a => `
+      <div class="card acard">
+        ${ring(a.progress)}
+        <div>
+          <div class="t">${esc(a.name)}</div>
+          ${a.phase ? `<span class="phase">${esc(a.phase)}</span>` : ""}
+          <div class="ai-lists">
+            <div><h4>${I.check} 本週完成</h4>${li(a.done)}</div>
+            <div><h4>${I.arrow} 下週計畫</h4>${li(a.next)}</div>
+          </div>
+          ${(a.blockers || a.need) ? `<div class="blocker">${a.blockers ? `<b>阻礙：</b>${esc(a.blockers)}` : ""}${a.blockers && a.need ? "<br>" : ""}${a.need ? `<b>需要：</b>${esc(a.need)}` : ""}</div>` : ""}
         </div>
-        ${notes(w.aiNotes)}
-      </section>`;
+      </div>`).join("") || `<div class="card empty-state"><div class="art" style="background:var(--violet-soft);color:var(--violet)">${I.inbox}</div><div>${esc(w.aiNote || "本週無特別報告事項")}</div></div>`;
+    html += `</div>${notes(w.aiNotes)}</section>`;
 
     app.innerHTML = html;
   }

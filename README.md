@@ -13,12 +13,8 @@
 
 ```
 週次：2026-W39（9/21–9/25）
-本週重點：
-- ...
-需副總決策：
-- 事項 / 說明 / 期限
 【客戶開發】
-- A公司（家電，Kayla）：階段 議約 → 本週進展… → 下一步…
+- A公司（家電，Kayla）：階段 議約 → 本週進展… → 下一步… → 待討論（需副總決定的事）…
 【重點客戶】
 - X客戶 專案名：綠燈 70%，本週…，風險…
 【循環標誌】
@@ -34,12 +30,12 @@
 
 | 區塊 | 欄位 |
 |---|---|
-| prospects | name, industry, stage(1接觸 2提案 3報價 4議約 5成交), owner, update, next, change(new/up/down/done/same) |
+| prospects | name, industry, stage(1接觸 2提案 3報價 4議約 5成交), owner, update, next, ask(待討論), change(new/up/down/done/same) |
 | keyClients | client, project, status(green/yellow/red), progress(0-100), milestones[{name, done}], update, risk |
-| labels | item, stage(1資料準備 2送件 3審查 4補件 5核發), expected, owner, note, change |
-| ai | name, progress, done[], next[], blockers, need |
+| labels | group(分組名), item, stage(1資料準備 2送件 3審查 4補件 5核發), expected, owner, note, change |
+| ai | name, progress, phase(階段標籤), done[], next[], blockers, need |
 
 選填欄位：
 - prospects / labels 每筆可加 `details[]`（條列細項）、prospects 可加 `link {label, url}`。
-- 每區塊可加 `xxxNotes {title, items[], links[]}` 補充說明卡（prospectsNotes / keyClientsNotes / labelsNotes / aiNotes）。
+- 每區塊可加 `xxxNotes {title, items[], conditions[], flow[{step, desc}], links[]}` 補充說明卡（conditions 畫成編號格、flow 畫成流程圖）（prospectsNotes / keyClientsNotes / labelsNotes / aiNotes）。
 - keyClients 或 ai 為空時，可用 `keyClientsNote` / `aiNote` 顯示一句說明。
