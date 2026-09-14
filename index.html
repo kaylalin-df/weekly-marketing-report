@@ -112,6 +112,17 @@
   .ask { margin-top: 8px; padding: 10px 12px; background: var(--red-soft); border-radius: 10px; font-size: 14px; display: flex; gap: 8px; align-items: flex-start; }
   .ask b { color: #a02c2c; flex: none; }
   .ref { font-size: 13px; margin-top: 6px; }
+  .topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; margin: 8px 0 4px; }
+  .topic { background: #fafaf8; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px 10px 14px; position: relative; }
+  .topic::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 10px; width: 3px; border-radius: 2px; background: var(--blue); }
+  .topic .th { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .topic .th b { font-size: 14px; }
+  .topic .th .no { flex: none; width: 20px; height: 20px; border-radius: 6px; background: var(--blue); color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+  .topic .th .tag { margin-left: auto; font-size: 11px; padding: 1px 8px; border-radius: 999px; background: var(--amber-soft); color: #8a5e00; white-space: nowrap; }
+  .topic .th .tag.done { background: var(--green-soft); color: #0a6a0a; }
+  .topic .th .tag.wait { background: #ececea; color: var(--ink-2); }
+  .topic ul { margin: 0; padding-left: 16px; font-size: 13px; color: var(--ink-2); }
+  .topic li { margin: 2px 0; }
 
   /* ---------- stepper ---------- */
   .stepper { display: flex; align-items: flex-start; margin: 12px 0 4px; }
@@ -248,6 +259,7 @@
   const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const chip = c => { const [cls, t] = CHANGE[c] || CHANGE.same; return `<span class="chip ${cls}">${t}</span>`; };
   const li = arr => (arr && arr.length) ? `<ul class="clean">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<div class="empty">無</div>`;
+  const topics = t => (t && t.length) ? `<div class="topics">${t.map((x, i) => `<div class="topic"><div class="th"><span class="no">${i + 1}</span><b>${esc(x.title)}</b>${x.tag ? `<span class="tag ${x.tagType || ""}">${esc(x.tag)}</span>` : ""}</div><ul>${(x.points || []).map(p => `<li>${esc(p)}</li>`).join("")}</ul></div>`).join("")}</div>` : "";
   const sub = arr => (arr && arr.length) ? `<ul class="sub">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
   const link = l => l ? `<div class="ref"><a href="${esc(l.url)}" target="_blank" rel="noopener">${I.link} ${esc(l.label || "參考連結")}</a></div>` : "";
   const stepper = (n, list, color, small) => `<div class="stepper ${small ? "sm" : ""}" style="--c:${color}">${list.map((s, i) => `<div class="step ${i + 1 < n ? "done" : i + 1 === n ? "cur" : ""}"><i></i>${s}</div>`).join("")}</div>`;
@@ -287,12 +299,12 @@
         <div class="side">
           <div class="avatar" style="background:${AVATAR_COLORS[i % AVATAR_COLORS.length]}">${esc(p.name.slice(0, 1))}</div>
           <div class="name">${esc(p.name)}</div>
-          <div class="meta"><span>${I.industry} ${esc(p.industry)}</span><span>${I.user} ${esc(p.owner)}</span></div>
+          <div class="meta"><span>${I.industry} ${esc(p.industry)}</span>${p.owner ? `<span>${I.user} ${esc(p.owner)}</span>` : ""}</div>
           ${chip(p.change)}
         </div>
         <div class="body">
           ${stepper(p.stage, PROSPECT_STAGES, "var(--blue)")}
-          <p>${esc(p.update)}</p>${sub(p.details)}${link(p.link)}
+          ${p.update ? `<p>${esc(p.update)}</p>` : ""}${sub(p.details)}${topics(p.topics)}${link(p.link)}
           ${p.next ? `<div class="next"><b>${I.arrow} 下一步</b><span>${esc(p.next)}</span></div>` : ""}
           ${p.ask ? `<div class="ask"><b>${I.flag} 待討論</b><span>${esc(p.ask)}</span></div>` : ""}
         </div>
@@ -320,7 +332,7 @@
       <div class="lgroup">${g.name ? `<div class="lgroup-title">${I.tag} ${esc(g.name)}</div>` : ""}
         <div class="grid grid-3">${g.items.map(l => `
           <div class="card lcard">
-            <div class="top"><div class="icon">${I.tag}</div><div><div class="item">${esc(l.item)}</div><div class="meta">${I.cal} 預計 ${esc(l.expected)} ・ ${esc(l.owner)}</div></div>${chip(l.change)}</div>
+            <div class="top"><div class="icon">${I.tag}</div><div><div class="item">${esc(l.item)}</div><div class="meta">${I.cal} 預計 ${esc(l.expected)}${l.owner ? ` ・ ${esc(l.owner)}` : ""}</div></div>${chip(l.change)}</div>
             ${stepper(l.stage, LABEL_STAGES, "var(--teal)", true)}
             <div class="note">${esc(l.note)}${sub(l.details)}</div>
           </div>`).join("")}

@@ -23,16 +23,16 @@
 - AI報價助理 60%：本週完成…；下週…；阻礙…
 ```
 
-2. Claude 會把內容轉成 `data/weeks.js` 的一筆資料、本機檢查畫面，然後 commit & push。
+2. 報告人是自己，資料裡不放負責人；Claude 會把長段內容潤飾成「需求項目卡」（標題＋狀態標籤＋2～3 句重點），再轉成 `data/weeks.js` 的一筆資料、本機檢查畫面，然後 commit & push。
 3. GitHub Pages 約 1 分鐘後自動更新。
 
 ## 資料欄位
 
 | 區塊 | 欄位 |
 |---|---|
-| prospects | name, industry, stage(1接觸 2提案 3報價 4議約 5成交), owner, update, next, ask(待討論), change(new/up/down/done/same) |
+| prospects | name, industry, stage(1接觸 2提案 3報價 4議約 5成交), update(一句摘要), topics[{title, tag, tagType(done/wait), points[]}](需求項目卡), next, ask(待討論), change(new/up/down/done/same) |
 | keyClients | client, project, status(green/yellow/red), progress(0-100), milestones[{name, done}], update, risk |
-| labels | group(分組名), item, stage(1資料準備 2送件 3審查 4補件 5核發), expected, owner, note, change |
+| labels | group(分組名), item, stage(1資料準備 2送件 3審查 4補件 5核發), expected, note(一句), details[](短條列), change |
 | ai | name, progress, phase(階段標籤), done[], next[], blockers, need |
 
 選填欄位：
