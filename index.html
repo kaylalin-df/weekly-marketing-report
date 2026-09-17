@@ -109,6 +109,8 @@
   .pcard .body p { margin: 0 0 6px; }
   ul.sub { margin: 4px 0 8px; padding-left: 20px; font-size: 14px; color: var(--ink-2); }
   ul.sub li { margin: 4px 0; }
+  ul.sub li.hl::marker { color: var(--red); }
+  ul.sub li.hl span { background: var(--red-soft); color: #a02c2c; font-weight: 600; padding: 1px 6px; border-radius: 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
   .next { margin-top: 10px; padding: 10px 12px; background: var(--blue-soft); border-radius: 10px; font-size: 14px; display: flex; gap: 8px; align-items: flex-start; }
   .next b { color: #1c5cab; flex: none; }
   .ask { margin-top: 8px; padding: 10px 12px; background: var(--red-soft); border-radius: 10px; font-size: 14px; display: flex; gap: 8px; align-items: flex-start; }
@@ -262,7 +264,7 @@
   const chip = c => { const [cls, t] = CHANGE[c] || CHANGE.same; return `<span class="chip ${cls}">${t}</span>`; };
   const li = arr => (arr && arr.length) ? `<ul class="clean">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<div class="empty">無</div>`;
   const topics = t => (t && t.length) ? `<div class="topics">${t.map((x, i) => `<div class="topic"><div class="th"><span class="no">${i + 1}</span><b>${esc(x.title)}</b>${x.tag ? `<span class="tag ${x.tagType || ""}">${esc(x.tag)}</span>` : ""}</div><ul>${(x.points || []).map(p => `<li>${esc(p)}</li>`).join("")}</ul></div>`).join("")}</div>` : "";
-  const sub = arr => (arr && arr.length) ? `<ul class="sub">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
+  const sub = arr => (arr && arr.length) ? `<ul class="sub">${arr.map(x => (x && x.hl) ? `<li class="hl"><span>${esc(x.text)}</span></li>` : `<li>${esc(x)}</li>`).join("")}</ul>` : "";
   const link = l => l ? `<div class="ref"><a href="${esc(l.url)}" target="_blank" rel="noopener">${I.link} ${esc(l.label || "參考連結")}</a></div>` : "";
   const stepper = (n, list, color, small) => `<div class="stepper ${small ? "sm" : ""}" style="--c:${color}">${list.map((s, i) => `<div class="step ${i + 1 < n ? "done" : i + 1 === n ? "cur" : ""}"><i></i>${s}</div>`).join("")}</div>`;
   const notes = (n, color) => n ? `<div class="card notes"><h3>${I.info} ${esc(n.title || "補充說明")}</h3>${n.items ? li(n.items) : ""}${n.conditions ? cond(n.conditions) : ""}${n.flow ? flow(n.flow) : ""}${(n.links || []).map(link).join("")}</div>` : "";
