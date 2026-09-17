@@ -228,7 +228,7 @@
 <main id="app"></main>
 <footer>資料檔：data/weeks.js ・ 每週一更新</footer>
 
-<script src="data/weeks.js"></script>
+<script>document.write('<script src="data/weeks.js?v=' + Date.now() + '"><\/script>');</script>
 <script>
 (function () {
   const DATA = window.WEEKLY_DATA || [];
