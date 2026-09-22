@@ -65,13 +65,17 @@ window.WEEKLY_DATA = [
       },
       {
         name: "華邦電子", industry: "半導體", stage: 2,
-        update: "對三款 rPP 產品有興趣，雙向交換樣品中。",
+        update: "三款 rPP 產品持續洽談中；濾心、濾袋再生評估已有結論，先不推進。",
         topics: [
-          { title: "產品需求", tag: "本週寄樣", points: ["名片盒、識別證套、多功能掛繩三款"] },
-          { title: "廢料再生評估", tag: "等對方寄件", tagType: "wait", points: ["對方將寄乾淨版濾心、濾袋", "由研發部評估再生製成塑膠粒子的可行性"] }
+          { title: "產品需求", tag: "已寄樣", tagType: "done", points: ["名片盒、識別證套、多功能掛繩三款"] },
+          { title: "濾心、濾袋再生評估", tag: "先不推進", tagType: "wait", points: [
+            "評估結果：濾材後端純化處理門檻較高",
+            "該物料較難延伸至其他廠區做規模化整合",
+            "考量廠內產線量能與整體開發的成本效益，結論為先不推進此專案"
+          ] }
         ],
-        next: "本週寄出三款樣品；收到濾心濾袋後交研發評估。",
-        change: "same"
+        next: "向客戶說明濾心、濾袋評估結論；持續追蹤三款 rPP 產品的回饋。",
+        change: "down"
       },
       {
         name: "瀚克寶寶", industry: "嬰兒副食品", stage: 3,
