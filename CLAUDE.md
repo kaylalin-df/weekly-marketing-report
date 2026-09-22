@@ -55,15 +55,17 @@
   labels: [{ group, item, stage(1資料準備 2送件 3審查 4補件 5核發), expected, note, details[], change }],
   labelsNotes: { title, items[], conditions[], flow[{step, desc}], links[{label,url}] },
   ai: [{ name, progress, phase, done[], next[], blockers, need }],
-  aiNote
+  aiNote,
+  shares: [{ title, meta, summary, points[], link{label,url} }]   // 選填；有資料才會顯示「資訊分享」區塊（放在 AI 開發之後）
 }
 ```
 
-## 目前狀態（2026-09-17）
+## 目前狀態（2026-09-22）
 
 - 週次編號依 Kayla 的定義，不是 ISO 週：W38 = 2026/09/07–09/11、W39 = 2026/09/14–09/18，之後依此類推。
 - **每次 Kayla 報新進度都要新開一週，保留上一週資料，不可覆蓋**（除非她明說是同一週補充）。
-- 兩週資料：W39（最新）、W38。
+- 三週資料：W40（2026/09/21–09/25，進行中，Kayla 會陸續補內容）、W39、W38。
+- W40 新增「資訊分享」區塊（`shares`），第一則是 DPP 產品數位護照產業論壇，連結到 https://claude.ai/artifact/UpNRnG6Evn3rGBTfjUAi5o。
 - 客戶開發（W39）：華邦電子（提案）、遠東銀行（提案，6 項需求）、本田通商（接觸，保桿再生造粒＋rPP 提袋，窗口為研發部 Chris 經理）、瀚克寶寶（報價）。WACOM 於 W39 依 Kayla 要求移除（W38 保留）。
 - 重點客戶：本週無。
 - 循環標誌：個案評估中 3 項（HDPE 瓶器、雨傘、PVC 地板）、rPP 五項（資料準備中；布料最齊，掛繩等東昌新版工廠登記，名片盒／識別證套卡在振順無工廠登記）。
