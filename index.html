@@ -279,7 +279,7 @@
   const ring = (pct) => { const r = 40, c = 2 * Math.PI * r; return `<div class="ring"><svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="${r}" stroke="#ebe6fb" stroke-width="10" fill="none"/><circle cx="48" cy="48" r="${r}" stroke="#6a4fd8" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - pct / 100)}"/></svg><div class="num">${pct}%</div></div>`; };
 
   document.getElementById("logoIc").innerHTML = I.logo;
-  document.getElementById("topnav").innerHTML = [["#prospects", I.users, "客戶開發"], ["#clients", I.briefcase, "重點客戶"], ["#labels", I.recycle, "循環標誌"], ["#ai", I.cpu, "AI 開發"], ["#shares", I.info, "資訊分享"]]
+  document.getElementById("topnav").innerHTML = [["#prospects", I.users, "客戶開發"], ["#clients", I.briefcase, "重點客戶"], ["#labels", I.recycle, "循環標誌"], ["#shares", I.info, "資訊分享"], ["#ai", I.cpu, "AI 開發"]]
     .map(([h, ic, t]) => `<a href="${h}">${ic.replace(/width="22" height="22"/, 'width="14" height="14"')} ${t}</a>`).join("");
 
   function render(w) {
@@ -350,7 +350,20 @@
       </div>`).join("") || `<div class="card empty">無</div>`;
     html += `</section>`;
 
-    // ---- 4. AI ----
+    // ---- 4. shares (optional) ----
+    const sh = w.shares || [];
+    if (sh.length) {
+      html += `<section>${secHead("c-amber", I.info, "資訊分享", `${sh.length} 則`, "shares")}<div class="grid grid-2">`;
+      html += sh.map(x => `
+        <div class="card scard">
+          <div class="t">${esc(x.title)}</div>
+          ${x.meta ? `<div class="meta">${esc(x.meta)}</div>` : ""}
+          ${x.summary ? `<p>${esc(x.summary)}</p>` : ""}${sub(x.points)}${link(x.link)}
+        </div>`).join("");
+      html += `</div></section>`;
+    }
+
+    // ---- 5. AI ----
     html += `<section>${secHead("c-violet", I.cpu, "AI 開發進度", `${ai.length} 個專案`, "ai")}<div class="grid grid-2">`;
     html += ai.map(a => `
       <div class="card acard">
@@ -366,19 +379,6 @@
         </div>
       </div>`).join("") || `<div class="card empty-state"><div class="art" style="background:var(--violet-soft);color:var(--violet)">${I.inbox}</div><div>${esc(w.aiNote || "本週無特別報告事項")}</div></div>`;
     html += `</div>${notes(w.aiNotes)}</section>`;
-
-    // ---- 5. shares (optional) ----
-    const sh = w.shares || [];
-    if (sh.length) {
-      html += `<section>${secHead("c-amber", I.info, "資訊分享", `${sh.length} 則`, "shares")}<div class="grid grid-2">`;
-      html += sh.map(x => `
-        <div class="card scard">
-          <div class="t">${esc(x.title)}</div>
-          ${x.meta ? `<div class="meta">${esc(x.meta)}</div>` : ""}
-          ${x.summary ? `<p>${esc(x.summary)}</p>` : ""}${sub(x.points)}${link(x.link)}
-        </div>`).join("");
-      html += `</div></section>`;
-    }
 
     app.innerHTML = html;
   }

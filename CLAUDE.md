@@ -56,7 +56,7 @@
   labelsNotes: { title, items[], conditions[], flow[{step, desc}], links[{label,url}] },
   ai: [{ name, progress, phase, done[], next[], blockers, need }],
   aiNote,
-  shares: [{ title, meta, summary, points[], link{label,url} }]   // 選填；有資料才會顯示「資訊分享」區塊（放在 AI 開發之後）
+  shares: [{ title, meta, summary, points[], link{label,url} }]   // 選填；有資料才會顯示「資訊分享」區塊（放在循環標誌之後、AI 開發之前）
 }
 ```
 
