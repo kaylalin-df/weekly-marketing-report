@@ -49,6 +49,7 @@
 ```
 {
   week, range, updated,
+  outreach: { hint, stats[{label,value,sub}], monthly[{month,sent,open,click,reply,total}], monthlyNote, hot{title, counts[{value,label}], list[{name,note,status,tagType(done|wait)}]}, timeline[{date,text}], next, ask },   // 選填；「新客戶開發進度」（開發信成效），排在最前面
   prospects: [{ name, industry, stage(1接觸 2提案 3報價 4議約 5成交), update, topics[{title, tag, tagType(done|wait), points[]}], details[], link{label,url}, next, ask, change(new|up|down|done|same) }],
   keyClients: [{ client, project, status(green|yellow|red), progress, milestones[{name, done}], update, risk }],
   keyClientsNote,                       // keyClients 為空時顯示的一句話
@@ -60,11 +61,12 @@
 }
 ```
 
-## 目前狀態（2026-09-22）
+## 目前狀態（2026-10-02）
 
 - 週次編號依 Kayla 的定義，不是 ISO 週：W38 = 2026/09/07–09/11、W39 = 2026/09/14–09/18，之後依此類推。
 - **每次 Kayla 報新進度都要新開一週，保留上一週資料，不可覆蓋**（除非她明說是同一週補充）。
-- 三週資料：W40（2026/09/21–09/25，進行中，Kayla 會陸續補內容）、W39、W38。
+- 四週資料：W41（2026/09/28–10/02）、W40、W39、W38。
+- W41 新增「新客戶開發進度」區塊（outreach），放在最前面：開發信累計成效、每月成效、熱名單、開發歷程。資料來自 Kayla 貼的試算表截圖；**頁面是公開的，熱名單只放公司名與狀態，不放對接窗口姓名、電話、分機**。
 - W40 新增「資訊分享」區塊（`shares`），第一則是 DPP 產品數位護照產業論壇，連結到 https://claude.ai/artifact/UpNRnG6Evn3rGBTfjUAi5o。
 - 客戶開發（W39）：華邦電子（提案）、遠東銀行（提案，6 項需求）、本田通商（接觸，保桿再生造粒＋rPP 提袋，窗口為研發部 Chris 經理）、瀚克寶寶（報價）。WACOM 於 W39 依 Kayla 要求移除（W38 保留）。
 - 重點客戶：本週無。
