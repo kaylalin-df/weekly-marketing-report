@@ -150,28 +150,6 @@ window.WEEKLY_DATA = [
 
     labels: [
       {
-        group: "個案申請評估中", item: "HDPE 瓶器", stage: 1, expected: "待定",
-        note: "原「塑膠容器」類別僅限繳回收處理費的製造業者申請，品牌販售業者不符。",
-        details: ["改走個案申請：循環材料＋可重複填充"],
-        change: "same"
-      },
-      {
-        group: "個案申請評估中", item: "雨傘", stage: 1, expected: "待定",
-        note: "再生塑膠佔整支重量比例過低，原本不符資格。",
-        details: ["科長說法：傘面用再生塑膠＋提供一年保固，即符合「可維修延長使用」而具申請資格"],
-        change: "same"
-      },
-      {
-        group: "個案申請評估中", item: "PVC 地板", stage: 1, expected: "待定",
-        note: "會上點名 PVC 仍不符資格；會後私詢科長取得可嘗試的條件。",
-        details: [
-          "前提：100% PVC 不摻其他塑膠，且可 100% 去化再製",
-          "提高通過率的兩條件：第三方驗證、已有客戶執行的成熟商業模式",
-          "待討論：是否與文康投入第三方驗證後送件"
-        ],
-        change: "same"
-      },
-      {
         group: "rPP 產品線（五項）", item: "rPP 再生布料－單紗", stage: 2, expected: "待定",
         note: "9/29 已送件申請。",
         details: [
@@ -199,22 +177,60 @@ window.WEEKLY_DATA = [
         change: "up"
       },
       {
-        group: "rPP 產品線（五項）", item: "rPP 識別證套", stage: 1, expected: "待定",
-        note: "只差「自我聲明書」內部用印，完成即可送件。",
+        group: "rPP 產品線（五項）", item: "rPP 識別證套", stage: 2, expected: "待定",
+        note: "10/2 已送件申請。",
         details: [
           "9/23～9/29 收到研發部轉來的塑膠中心材質檢測報告",
-          { text: "尚欠：自我聲明書內部用印", hl: true }
+          "10/2 自我聲明書內部用印完成，同日完成送件"
         ],
         change: "up"
       },
       {
-        group: "rPP 產品線（五項）", item: "rPP 名片盒", stage: 1, expected: "待定",
-        note: "只差「自我聲明書」內部用印，完成即可送件。",
+        group: "rPP 產品線（五項）", item: "rPP 名片盒", stage: 2, expected: "待定",
+        note: "10/2 已送件申請。",
         details: [
           "9/23～9/29 收到研發部轉來的塑膠中心材質檢測報告",
-          { text: "尚欠：自我聲明書內部用印", hl: true }
+          "10/2 自我聲明書內部用印完成，同日完成送件"
         ],
         change: "up"
+      },
+      {
+        group: "下一階段送件（規劃中）", item: "rPP 單紗提袋", stage: 1, expected: "待定",
+        note: "第一波五項送件完成後，下一階段送提袋一款。",
+        details: [
+          "同步盤點其他需要材質檢測的項目（含物性），整理後提供研發部，詢問塑膠中心能否檢測"
+        ],
+        change: "new"
+      },
+      {
+        group: "下一階段送件（規劃中）", item: "rPP 複紗提袋", stage: 1, expected: "待定",
+        note: "第一波五項送件完成後，下一階段送提袋一款。",
+        details: [
+          "同步盤點其他需要材質檢測的項目（含物性），整理後提供研發部，詢問塑膠中心能否檢測"
+        ],
+        change: "new"
+      },
+      {
+        group: "個案申請評估中", item: "HDPE 瓶器", stage: 1, expected: "待定",
+        note: "原「塑膠容器」類別僅限繳回收處理費的製造業者申請，品牌販售業者不符。",
+        details: ["改走個案申請：循環材料＋可重複填充"],
+        change: "same"
+      },
+      {
+        group: "個案申請評估中", item: "雨傘", stage: 1, expected: "待定",
+        note: "再生塑膠佔整支重量比例過低，原本不符資格。",
+        details: ["科長說法：傘面用再生塑膠＋提供一年保固，即符合「可維修延長使用」而具申請資格"],
+        change: "same"
+      },
+      {
+        group: "個案申請評估中", item: "PVC 地板", stage: 1, expected: "待定",
+        note: "會上點名 PVC 仍不符資格；會後私詢科長取得可嘗試的條件。",
+        details: [
+          "前提：100% PVC 不摻其他塑膠，且可 100% 去化再製",
+          "提高通過率的兩條件：第三方驗證、已有客戶執行的成熟商業模式",
+          "待討論：是否與文康投入第三方驗證後送件"
+        ],
+        change: "same"
       }
     ],
 
