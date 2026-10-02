@@ -299,11 +299,13 @@
   const ring = (pct) => { const r = 40, c = 2 * Math.PI * r; return `<div class="ring"><svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="${r}" stroke="#ebe6fb" stroke-width="10" fill="none"/><circle cx="48" cy="48" r="${r}" stroke="#6a4fd8" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - pct / 100)}"/></svg><div class="num">${pct}%</div></div>`; };
 
   document.getElementById("logoIc").innerHTML = I.logo;
-  document.getElementById("topnav").innerHTML = [["#outreach", I.users, "新客戶開發"], ["#prospects", I.users, "客戶開發"], ["#clients", I.briefcase, "重點客戶"], ["#labels", I.recycle, "循環標誌"], ["#shares", I.info, "資訊分享"], ["#ai", I.cpu, "AI 開發"]]
-    .map(([h, ic, t]) => `<a href="${h}">${ic.replace(/width="22" height="22"/, 'width="14" height="14"')} ${t}</a>`).join("");
+  const NAV = [["#outreach", I.users, "新客戶開發", "outreach"], ["#prospects", I.users, "客戶開發"], ["#clients", I.briefcase, "重點客戶"], ["#labels", I.recycle, "循環標誌"], ["#shares", I.info, "資訊分享", "shares"], ["#ai", I.cpu, "AI 開發", "ai"]];
+  const renderNav = w => { document.getElementById("topnav").innerHTML = NAV.filter(n => !n[3] || (w && (Array.isArray(w[n[3]]) ? w[n[3]].length : w[n[3]])))
+    .map(([h, ic, t]) => `<a href="${h}">${ic.replace(/width="22" height="22"/, 'width="14" height="14"')} ${t}</a>`).join(""); };
 
   function render(w) {
     const hero = document.getElementById("hero"), app = document.getElementById("app");
+    renderNav(w);
     if (!w) { app.innerHTML = `<p class="empty">尚無資料</p>`; return; }
     const ps = w.prospects || [], kc = w.keyClients || [], lb = w.labels || [], ai = w.ai || [];
 
@@ -316,7 +318,7 @@
         <a href="#prospects">${I.users.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${ps.length}</b><span>潛在客戶</span></a>
         <a href="#clients">${I.briefcase.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${kc.length}</b><span>重點專案</span></a>
         <a href="#labels">${I.recycle.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${lb.length}</b><span>循環標誌申請</span></a>
-        <a href="#ai">${I.cpu.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${ai.length}</b><span>AI 專案</span></a>
+        ${w.ai ? `<a href="#ai">${I.cpu.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${ai.length}</b><span>AI 專案</span></a>` : ""}
       </div></div>`;
 
     let html = "";
@@ -397,6 +399,7 @@
     }
 
     // ---- 5. AI ----
+    if (w.ai) {
     html += `<section>${secHead("c-violet", I.cpu, "AI 開發進度", `${ai.length} 個專案`, "ai")}<div class="grid grid-2">`;
     html += ai.map(a => `
       <div class="card acard">
@@ -412,6 +415,7 @@
         </div>
       </div>`).join("") || `<div class="card empty-state"><div class="art" style="background:var(--violet-soft);color:var(--violet)">${I.inbox}</div><div>${esc(w.aiNote || "本週無特別報告事項")}</div></div>`;
     html += `</div>${notes(w.aiNotes)}</section>`;
+    }
 
     app.innerHTML = html;
   }

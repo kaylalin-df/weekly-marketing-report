@@ -238,21 +238,6 @@ window.WEEKLY_DATA = [
         change: "same"
       }
     ],
-
-    ai: [
-      {
-        name: "客戶開發優化與需求分析", progress: 0, phase: "第一階段・盤點中",
-        done: [],
-        next: ["盤點新客戶開發流程可優化的環節", "利用開發中及既有客戶資料，分析客戶需求與開發調整方向"],
-        blockers: "", need: ""
-      },
-      {
-        name: "循環服務成本報價系統", progress: 0, phase: "下階段・規劃中",
-        done: [],
-        next: ["釐清循環服務的成本報價規劃", "規劃確定後進行系統開發"],
-        blockers: "", need: ""
-      }
-    ],
     shares: [
       {
         title: "DPP 產品數位護照產業論壇",
