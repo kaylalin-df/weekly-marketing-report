@@ -38,7 +38,7 @@ window.WEEKLY_DATA = [
           { name: "日電貿", note: "10/01 撥打", status: "再追蹤" },
           { name: "遠東銀行", note: "已進入客戶開發", status: "再追蹤" },
           { name: "星通資訊", note: "8/25 撥打", status: "再追蹤" },
-          { name: "智邦科技", status: "未撥", tagType: "wait" },
+          { name: "智邦科技", note: "Tray 盤回收再製", status: "洽談中" },
           { name: "大台北區瓦斯", status: "無意願", tagType: "wait" }
         ]
       },
