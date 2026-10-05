@@ -164,8 +164,8 @@ window.WEEKLY_DATA = [
         change: "up"
       },
       {
-        group: "rPP 產品線（五項）", item: "rPP 再生布料－複紗", stage: 2, expected: "待定",
-        note: "9/29 已送件申請。",
+        group: "rPP 產品線（五項）", item: "rPP 再生布料－複紗", stage: 3, expected: "待定",
+        note: "9/29 已送件，審查中。",
         details: [
           "9/23～9/29 收到研發部轉來的塑膠中心材質檢測報告",
           "9/29 完成送件"
@@ -183,8 +183,8 @@ window.WEEKLY_DATA = [
         change: "down"
       },
       {
-        group: "rPP 產品線（五項）", item: "rPP 識別證套", stage: 2, expected: "待定",
-        note: "10/2 已送件申請。",
+        group: "rPP 產品線（五項）", item: "rPP 識別證套", stage: 3, expected: "待定",
+        note: "10/2 已送件，審查中。",
         details: [
           "9/23～9/29 收到研發部轉來的塑膠中心材質檢測報告",
           "10/2 自我聲明書內部用印完成，同日完成送件"
@@ -192,8 +192,8 @@ window.WEEKLY_DATA = [
         change: "up"
       },
       {
-        group: "rPP 產品線（五項）", item: "rPP 名片盒", stage: 2, expected: "待定",
-        note: "10/2 已送件申請。",
+        group: "rPP 產品線（五項）", item: "rPP 名片盒", stage: 3, expected: "待定",
+        note: "10/2 已送件，審查中。",
         details: [
           "9/23～9/29 收到研發部轉來的塑膠中心材質檢測報告",
           "10/2 自我聲明書內部用印完成，同日完成送件"
