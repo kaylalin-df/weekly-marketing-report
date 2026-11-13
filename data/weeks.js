@@ -124,16 +124,28 @@ window.WEEKLY_DATA = [
 
     labels: [
       {
-        group: "rPP 產品線（五項）", item: "rPP 再生布料－單紗", stage: 4, expected: "待定",
-        note: "10/5 已補件重送，等候審查結果。",
-        details: ["10/3 平台通知補件（附表 1-3 產品基本資料表），10/5 已補件重送"],
-        change: "same"
+        group: "rPP 產品線（五項）", item: "rPP 再生布料－單紗", stage: 5, expected: "—",
+        note: "循環標誌審查通過。",
+        details: ["10/5 補件重送後審查通過"],
+        change: "done"
       },
       {
-        group: "rPP 產品線（五項）", item: "rPP 再生布料－複紗", stage: 3, expected: "待定",
-        note: "9/29 已送件，審查中。",
-        details: ["9/29 完成送件"],
-        change: "same"
+        group: "rPP 產品線（五項）", item: "rPP 再生布料－複紗", stage: 5, expected: "—",
+        note: "循環標誌審查通過。",
+        details: ["9/29 送件，審查通過"],
+        change: "done"
+      },
+      {
+        group: "rPP 產品線（五項）", item: "rPP 識別證套", stage: 5, expected: "—",
+        note: "循環標誌審查通過。",
+        details: ["10/2 送件，審查通過"],
+        change: "done"
+      },
+      {
+        group: "rPP 產品線（五項）", item: "rPP 名片盒", stage: 5, expected: "—",
+        note: "循環標誌審查通過。",
+        details: ["10/2 送件，審查通過"],
+        change: "done"
       },
       {
         group: "rPP 產品線（五項）", item: "rPP 多功能掛繩", stage: 1, expected: "待定",
@@ -142,27 +154,38 @@ window.WEEKLY_DATA = [
         change: "same"
       },
       {
-        group: "rPP 產品線（五項）", item: "rPP 識別證套", stage: 3, expected: "待定",
-        note: "10/2 已送件，審查中。",
-        details: ["10/2 自我聲明書用印完成，同日送件"],
-        change: "same"
-      },
-      {
-        group: "rPP 產品線（五項）", item: "rPP 名片盒", stage: 3, expected: "待定",
-        note: "10/2 已送件，審查中。",
-        details: ["10/2 自我聲明書用印完成，同日送件"],
-        change: "same"
-      },
-      {
-        group: "第二階段：提袋", item: "rPP 提袋（單紗／複紗）", stage: 1, expected: "待定",
-        note: "塑膠類確定退件、不能申請；改洽紡織品類，承辦仍在內部討論。",
+        group: "第二階段：提袋（等待類別認定）", item: "rPP 單紗提袋", stage: 1, expected: "待定",
+        note: "以第二類塑膠類「2-3 單一塑膠材料」送件被退件，等第一類紡織類承辦內部討論後回覆。",
         details: [
-          { text: "紡織類與塑膠類承辦的認定不一致，案件被退回", hl: true },
-          "11/9 再聯繫 2-1 承辦，說明其他類別承辦的回覆，確認最適合的申請類別與依據（不直接改送個案）",
-          "2-3 可能要求再生比例、溯源、庫存及下游製造端驗證文件，現有供應鏈未必具備",
-          "若成品申請受限，另確認能否以已取得循環標誌的上游材料對外說明"
+          { text: "塑膠類承辦表示：資源循環署認定提袋應申請第一類紡織類，不是第二類塑膠類", hl: true },
+          "紡織類承辦表示：目前紡織類能通過的是布等真正的紡織品；因塑膠類承辦建議改申請紡織類，會內部討論後回覆",
+          "11/9 紡織類承辦表示討論後回覆，截至 11/13 尚未收到"
         ],
         change: "down"
+      },
+      {
+        group: "第二階段：提袋（等待類別認定）", item: "rPP 複紗提袋", stage: 1, expected: "待定",
+        note: "與單紗提袋分開送件，同樣因類別認定被退件，等紡織類承辦回覆。",
+        details: [
+          "退件原因與單紗提袋相同（2-3 單一塑膠材料類別）",
+          "11/9 紡織類承辦表示討論後回覆，截至 11/13 尚未收到"
+        ],
+        change: "down"
+      },
+      {
+        group: "下一階段送件（資料索取中）", item: "rPP 塑膠板材", stage: 1, expected: "待定",
+        note: "下一階段準備送件，廠商資料尚未齊全，向廠商索取中。",
+        change: "new"
+      },
+      {
+        group: "下一階段送件（資料索取中）", item: "歐邁嘉 rPET 帽子", stage: 1, expected: "待定",
+        note: "下一階段準備送件，廠商資料尚未齊全，向歐邁嘉索取中。",
+        change: "new"
+      },
+      {
+        group: "下一階段送件（資料索取中）", item: "歐邁嘉 rPET T-shirt", stage: 1, expected: "待定",
+        note: "下一階段準備送件，廠商資料尚未齊全，向歐邁嘉索取中。",
+        change: "new"
       },
       {
         group: "個案申請評估中", item: "HDPE 瓶器", stage: 1, expected: "待定",
