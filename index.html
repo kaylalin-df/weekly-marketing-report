@@ -235,6 +235,10 @@
   .ai-lists h4 { margin: 0 0 4px; font-size: 12px; color: var(--ink-3); font-weight: 500; display: flex; align-items: center; gap: 4px; }
   .ai-lists ul { margin: 0; padding-left: 18px; font-size: 14px; }
   .ai-lists li { margin: 3px 0; }
+  .wcard .wh { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+  .wcard .t { font-weight: 700; font-size: 16px; }
+  .wcard .wst { flex: none; font-size: 12px; color: var(--violet); background: var(--violet-soft); padding: 2px 8px; border-radius: 999px; }
+  .wcard .wst.done { color: var(--green, #1f8a4c); background: var(--green-soft, #e6f4ec); }
   .blocker { margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--amber-soft); font-size: 13px; color: #8a5e00; }
 
   footer { max-width: 1180px; margin: 0 auto; padding: 0 20px 30px; color: var(--ink-3); font-size: 12px; }
@@ -299,7 +303,7 @@
   const ring = (pct) => { const r = 40, c = 2 * Math.PI * r; return `<div class="ring"><svg viewBox="0 0 96 96"><circle cx="48" cy="48" r="${r}" stroke="#ebe6fb" stroke-width="10" fill="none"/><circle cx="48" cy="48" r="${r}" stroke="#6a4fd8" stroke-width="10" fill="none" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - pct / 100)}"/></svg><div class="num">${pct}%</div></div>`; };
 
   document.getElementById("logoIc").innerHTML = I.logo;
-  const NAV = [["#outreach", I.users, "新客戶開發", "outreach"], ["#prospects", I.users, "客戶開發"], ["#clients", I.briefcase, "重點客戶"], ["#labels", I.recycle, "循環標誌"], ["#shares", I.info, "資訊分享", "shares"], ["#ai", I.cpu, "AI 開發", "ai"]];
+  const NAV = [["#outreach", I.users, "新客戶開發", "outreach"], ["#prospects", I.users, "客戶開發"], ["#clients", I.briefcase, "重點客戶"], ["#labels", I.recycle, "循環標誌"], ["#work", I.check, "工作進度", "work"], ["#shares", I.info, "資訊分享", "shares"], ["#ai", I.cpu, "AI 開發", "ai"]];
   const renderNav = w => { document.getElementById("topnav").innerHTML = NAV.filter(n => !n[3] || (w && (Array.isArray(w[n[3]]) ? w[n[3]].length : w[n[3]])))
     .map(([h, ic, t]) => `<a href="${h}">${ic.replace(/width="22" height="22"/, 'width="14" height="14"')} ${t}</a>`).join(""); };
 
@@ -307,7 +311,7 @@
     const hero = document.getElementById("hero"), app = document.getElementById("app");
     renderNav(w);
     if (!w) { app.innerHTML = `<p class="empty">尚無資料</p>`; return; }
-    const ps = w.prospects || [], kc = w.keyClients || [], lb = w.labels || [], ai = w.ai || [];
+    const ps = w.prospects || [], kc = w.keyClients || [], lb = w.labels || [], ai = w.ai || [], wk = w.work || [];
 
     hero.innerHTML = `<div class="hero-card">
       <div class="eyebrow">Kayla Weekly Marketing Report</div>
@@ -318,6 +322,7 @@
         <a href="#prospects">${I.users.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${ps.length}</b><span>潛在客戶</span></a>
         <a href="#clients">${I.briefcase.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${kc.length}</b><span>重點專案</span></a>
         <a href="#labels">${I.recycle.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${lb.length}</b><span>循環標誌申請</span></a>
+        ${wk.length ? `<a href="#work">${I.check.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${wk.length}</b><span>工作項目</span></a>` : ""}
         ${w.ai ? `<a href="#ai">${I.cpu.replace(/width="22" height="22"/, 'width="16" height="16"')}<b>${ai.length}</b><span>AI 專案</span></a>` : ""}
       </div></div>`;
 
@@ -384,6 +389,21 @@
         </div>
       </div>`).join("") || `<div class="card empty">無</div>`;
     html += `</section>`;
+
+    // ---- 3b. work progress (optional) ----
+    if (wk.length) {
+      html += `<section>${secHead("c-violet", I.check, "行銷工作進度", `${wk.length} 項`, "work")}<div class="grid grid-2">`;
+      html += wk.map(a => `
+        <div class="card wcard">
+          <div class="wh"><div class="t">${esc(a.name)}</div>${a.status ? `<span class="wst ${a.status === "已完成" ? "done" : ""}">${esc(a.status)}</span>` : ""}</div>
+          <div class="ai-lists">
+            <div><h4>${I.check} 已完成</h4>${li(a.done)}</div>
+            <div><h4>${I.arrow} 下一步</h4>${li(a.next)}</div>
+          </div>
+          ${a.blockers ? `<div class="blocker"><b>卡關：</b>${esc(a.blockers)}</div>` : ""}
+        </div>`).join("");
+      html += `</div></section>`;
+    }
 
     // ---- 4. shares (optional) ----
     const sh = w.shares || [];
