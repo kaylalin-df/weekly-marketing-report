@@ -97,6 +97,12 @@
   .o-table td { text-align: right; padding: 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
   .o-table th:first-child, .o-table td:first-child { text-align: left; }
   .o-table tr.total td { font-weight: 700; border-bottom: 0; background: #fafaf8; }
+  .o-note { margin-bottom: 14px; border-left: 4px solid var(--amber, #c98a00); }
+  .o-note p, .o-show p { margin: 6px 0 8px; font-size: 14px; line-height: 1.7; }
+  .o-show { margin-top: 14px; }
+  .o-show figure { margin: 10px 0 12px; }
+  .o-show img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; }
+  .o-show figcaption { font-size: 12px; color: var(--ink-3); margin-top: 6px; }
   .o-funnel { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
   .o-funnel div { flex: 1 1 90px; background: #fafaf8; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font-size: 12px; color: var(--ink-2); }
   .o-funnel b { display: block; font-size: 20px; color: var(--ink); }
@@ -333,11 +339,13 @@
     if (o) {
       html += `<section>${secHead("c-blue", I.users, "新客戶開發進度", esc(o.hint || ""), "outreach")}`;
       html += `<div class="o-stats">${(o.stats || []).map(x => `<div class="card o-stat"><div class="k">${esc(x.label)}</div><div class="v">${esc(x.value)}</div>${x.sub ? `<div class="d">${esc(x.sub)}</div>` : ""}</div>`).join("")}</div>`;
+      if (o.note) html += `<div class="card o-note"><h3>${I.info} ${esc(o.note.title)}</h3>${o.note.text ? `<p>${esc(o.note.text)}</p>` : ""}${sub(o.note.points)}</div>`;
       html += `<div class="grid grid-2">`;
       if (o.monthly) html += `<div class="card"><h3>${I.cal} 每月成效</h3><div class="o-wrap"><table class="o-table"><thead><tr><th>月份</th><th>寄出</th><th>開信率</th><th>點擊率</th><th>回覆率</th></tr></thead><tbody>${o.monthly.map(m => `<tr class="${m.total ? "total" : ""}"><td>${esc(m.month)}</td><td>${esc(m.sent)}</td><td>${esc(m.open)}</td><td>${esc(m.click)}</td><td>${esc(m.reply)}</td></tr>`).join("")}</tbody></table></div>${o.monthlyNote ? `<div class="ref" style="color:var(--ink-3)">${esc(o.monthlyNote)}</div>` : ""}</div>`;
       if (o.hot) html += `<div class="card"><h3>${I.flag} ${esc(o.hot.title || "熱名單")}</h3><div class="o-funnel">${(o.hot.counts || []).map(c => `<div><b>${esc(c.value)}</b>${esc(c.label)}</div>`).join("")}</div><ul class="o-hot">${(o.hot.list || []).map(h => `<li><span>${esc(h.name)}${h.note ? `<small>${esc(h.note)}</small>` : ""}</span><span class="o-tag ${h.tagType || ""}">${esc(h.status)}</span></li>`).join("")}</ul></div>`;
       html += `</div>`;
       if (o.timeline || o.next) html += `<div class="card" style="margin-top:14px">${o.timeline ? `<h3>${I.arrow} 開發歷程</h3><ul class="o-time">${o.timeline.map(t => `<li><b>${esc(t.date)}</b><span>${esc(t.text)}</span></li>`).join("")}</ul>` : ""}${o.next ? `<div class="next"><b>${I.arrow} 下一步</b><span>${esc(o.next)}</span></div>` : ""}${o.ask ? `<div class="ask"><b>${I.flag} 待討論</b><span>${esc(o.ask)}</span></div>` : ""}</div>`;
+      (o.cards || []).forEach(c => { html += `<div class="card o-show"><h3>${I.check} ${esc(c.title)}</h3>${c.summary ? `<p>${esc(c.summary)}</p>` : ""}${c.img ? `<figure><a href="${esc(c.img)}" target="_blank" rel="noopener"><img src="${esc(c.img)}" alt="${esc(c.alt || c.title)}" loading="lazy"></a>${c.caption ? `<figcaption>${esc(c.caption)}</figcaption>` : ""}</figure>` : ""}${sub(c.points)}</div>`; });
       html += `</section>`;
     }
 
