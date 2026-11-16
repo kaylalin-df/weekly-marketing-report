@@ -91,7 +91,7 @@ window.WEEKLY_DATA = [
 
     prospects: [
       {
-        name: "瀚克寶寶", industry: "嬰兒副食品", stage: 5,
+        name: "瀚克寶寶/QBEBE", logo: "assets/logo_qbebe.png", industry: "嬰兒副食品", stage: 5,
         update: "10/16 開立報價單，客戶已先回簽。執行時程調整：回收與產品下單改到明年 2～3 月執行。",
         topics: [
           { title: "客戶背景", tag: "主管參考", tagType: "wait", points: [
@@ -118,7 +118,7 @@ window.WEEKLY_DATA = [
         change: "up"
       },
       {
-        name: "台灣日鑛金屬", industry: "金屬材料", stage: 1,
+        name: "台灣日鑛金屬", logo: "assets/logo_jx.png", industry: "金屬材料", stage: 1,
         update: "客戶看到大豐與配客嘉的循環包材合作案例後主動諮詢。廠內 PP 中空板箱用一次就焚化，每月約 600 箱，希望改成循環再利用；已提供兩份包材處理說明（11/2 版），並寄樣品給我們。（會議上搭配客戶的 PDF 說明）",
         topics: [
           { title: "客戶背景", tag: "主管參考", tagType: "wait", points: [
@@ -156,7 +156,7 @@ window.WEEKLY_DATA = [
         change: "new"
       },
       {
-        name: "年輕人眼鏡", industry: "眼鏡零售", stage: 1,
+        name: "年青人眼鏡", logo: "assets/logo_youngman.png", industry: "眼鏡零售", stage: 1,
         update: "對方 11/19（四）14:00–15:00 來訪，進行合作洽談與簡報。",
         next: "準備循環服務簡報與適合眼鏡業的案例；會後整理需求。",
         change: "new"
