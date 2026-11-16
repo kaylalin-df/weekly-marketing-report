@@ -292,10 +292,7 @@ window.WEEKLY_DATA = [
         next: ["模具詢價與實測後確認成本"] },
       { name: "官網循環服務頁", status: "進行中",
         done: ["盤點優化方向（廣告、SEO、AI 搜尋）"],
-        next: ["11 月完成產品內容優化"] },
-      { name: "品牌專案：遠百 × ELLE／VOGUE", status: "已完成",
-        done: ["10 月回收數據已交付，VOGUE 廣宣文章修正完成"],
-        next: ["按月交付回收數據"] }
+        next: ["11 月完成產品內容優化"] }
     ]
   },
   {
