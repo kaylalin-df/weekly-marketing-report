@@ -87,6 +87,24 @@ window.WEEKLY_DATA = [
         change: "up"
       },
       {
+        name: "膳魔師", logo: "assets/logo_thermos.png", industry: "生活用品（保溫瓶）", stage: 4,
+        update: "2027 年將延續合作，預計本週討論合約；客戶對 DIY 活動也有興趣，希望我們提案。",
+        topics: [
+          { title: "2026 合作", tag: "已結案", tagType: "done", points: [
+            "聯名回收專案、rPP 收納袋，皆已結案"
+          ] },
+          { title: "2027 續約", tag: "本週討論合約", points: [
+            "2027 年延續合作，本週討論合約內容"
+          ] },
+          { title: "DIY 活動", tag: "待提案", points: [
+            "客戶對 DIY 活動有興趣，希望大豐提案",
+            "可搭配三個 DIY 方案（品項與報價已初步完成）"
+          ] }
+        ],
+        next: "本週討論 2027 合約；整理 DIY 活動提案給客戶。",
+        change: "new"
+      },
+      {
         name: "台灣日鑛金屬", logo: "assets/logo_jx.png", industry: "金屬材料", stage: 1,
         update: "客戶看到大豐與配客嘉的循環包材合作案例後主動諮詢。廠內 PP 中空板箱用一次就焚化，每月約 600 箱，希望改成循環再利用；已提供兩份包材處理說明（11/2 版），並寄樣品給我們。（會議上搭配客戶的 PDF 說明）",
         topics: [
