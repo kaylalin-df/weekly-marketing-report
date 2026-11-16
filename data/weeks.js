@@ -172,7 +172,7 @@ window.WEEKLY_DATA = [
       title: "通過循環標誌",
       items: ["rPP 再生布料－單紗", "rPP 再生布料－複紗", "rPP 識別證套", "rPP 名片盒"],
       points: [
-        "11/4 資源循環署公開授證",
+        "原訂 11/4 的授證儀式延期，新日期待資源循環署通知",
         "11/13（五）業務部會議已布達給業務團隊",
         "本週整理電子檔資料，提供給業務團隊使用"
       ]
@@ -180,25 +180,25 @@ window.WEEKLY_DATA = [
     labels: [
       {
         group: "rPP 產品線（五項）", item: "rPP 再生布料－單紗", stage: 5, expected: "—",
-        note: "循環標誌審查通過，11/4 資源循環署公開授證。",
+        note: "循環標誌審查通過。",
         details: ["10/5 補件重送後審查通過"],
         change: "done"
       },
       {
         group: "rPP 產品線（五項）", item: "rPP 再生布料－複紗", stage: 5, expected: "—",
-        note: "循環標誌審查通過，11/4 資源循環署公開授證。",
+        note: "循環標誌審查通過。",
         details: ["9/29 送件，審查通過"],
         change: "done"
       },
       {
         group: "rPP 產品線（五項）", item: "rPP 識別證套", stage: 5, expected: "—",
-        note: "循環標誌審查通過，11/4 資源循環署公開授證。",
+        note: "循環標誌審查通過。",
         details: ["10/2 送件，審查通過"],
         change: "done"
       },
       {
         group: "rPP 產品線（五項）", item: "rPP 名片盒", stage: 5, expected: "—",
-        note: "循環標誌審查通過，11/4 資源循環署公開授證。",
+        note: "循環標誌審查通過。",
         details: ["10/2 送件，審查通過"],
         change: "done"
       },
