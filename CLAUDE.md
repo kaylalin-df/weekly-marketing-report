@@ -89,3 +89,4 @@
 - W47 outreach 新增兩個選填欄位（index.html 已支援）：`note {title, text, points[]}`（統計格下方的說明卡）、`cards [{title, summary, img, alt, caption, points[]}]`（開發歷程後的圖文卡，圖片放 `assets/`）。
 - 開信率口徑（Kayla 2026-11-13 要求）：開信含系統自動掃描，W47 起統計格顯示「實際開信率」（排除寄出後 3 分鐘內的開信，約 22%，以 10/12 前 678 封明細估算）與「真人點擊率」（stats 的 click）；每月表的點擊率也改用真人點擊。
 - 通話工作台截圖 `assets/calldesk_1113.png`：已模糊窗口姓名、電話、Email。之後放截圖一律先遮個資（頁面公開）。
+- outreach 可加 `nextHl: true`，「下一步」文字顯示為紅字（W47 起用於工讀生延後的說明）。
