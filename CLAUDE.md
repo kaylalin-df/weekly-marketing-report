@@ -96,4 +96,4 @@
 - 「行銷工作進度」是給副總看的：只寫大方向，每項「已完成」「下一步」各一句（Kayla 2026-11-16 要求），不寫檔名、頁數、細節步驟。
 - 客戶卡可加 `logo`（assets/ 內圖檔），左上角改顯示 logo；沒有 logo 時維持色塊＋首字。W47：瀚克寶寶/QBEBE（logo_qbebe.png）、台灣日鑛金屬（logo_jx.png）、年青人眼鏡（logo_youngman.png；注意是「年青人」不是「年輕人」）。
 - outreach 可用 `board {title, stats[{value,label,sub}], lines[{k,text}]}` 取代「每月成效＋電話開發＋開發歷程」三張卡（W47 起，Kayla 2026-11-16 要求簡化）：board 內含下一步／待討論。W47 起不放 monthly、hot、timeline，統計格也拿掉電話那格；電話開發口徑寫「約 30 家」（系統互動紀錄 22 家，Kayla 指定約 30 家）。
-- W47 新增膳魔師（既有客戶，2026 聯名回收、rPP 收納袋已結案）：2027 延續合作、本週討論合約（階段放「議約」）、客戶想要 DIY 活動提案。logo：`assets/logo_thermos.png`（來源 D:/DF/品牌LOGO/Thermos_logo.svg.png）。公開頁不寫成交金額。
+- W47 新增膳魔師（既有客戶，2026 聯名回收預計 11 月底結案、rPP 收納袋已結案）：2027 延續合作、本週討論合約（階段放「議約」）、客戶想要 DIY 活動提案。logo：`assets/logo_thermos.png`（來源 D:/DF/品牌LOGO/Thermos_logo.svg.png）。公開頁不寫成交金額。

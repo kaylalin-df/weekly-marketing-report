@@ -90,8 +90,9 @@ window.WEEKLY_DATA = [
         name: "膳魔師", logo: "assets/logo_thermos.png", industry: "生活用品（保溫瓶）", stage: 4,
         update: "2027 年將延續合作，預計本週討論合約；客戶對 DIY 活動也有興趣，希望我們提案。",
         topics: [
-          { title: "2026 合作", tag: "已結案", tagType: "done", points: [
-            "聯名回收專案、rPP 收納袋，皆已結案"
+          { title: "2026 合作", tag: "11 月底結案", points: [
+            "聯名回收專案：進行中，預計 11 月底結案",
+            "rPP 收納袋：已結案"
           ] },
           { title: "2027 續約", tag: "本週討論合約", points: [
             "2027 年延續合作，本週討論合約內容"
