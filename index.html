@@ -248,6 +248,17 @@
   .wcard .t { font-weight: 700; font-size: 16px; }
   .wcard .wst { flex: none; font-size: 12px; color: var(--violet); background: var(--violet-soft); padding: 2px 8px; border-radius: 999px; }
   .wcard .wst.done { color: var(--green, #1f8a4c); background: var(--green-soft, #e6f4ec); }
+  .lintro { display: flex; gap: 20px; align-items: center; margin: 0 0 18px; }
+  .lintro .lmark { width: 110px; height: auto; flex: none; }
+  .lintro .lhead { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .lintro .lhead b { font-size: 34px; line-height: 1; color: var(--teal); }
+  .lintro .lhead span { font-size: 17px; font-weight: 700; }
+  .lintro .lchips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+  .lintro .lchips span { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; padding: 3px 10px; border-radius: 999px; background: var(--green-soft); color: #0a6a3a; }
+  .lintro ul.sub { margin: 4px 0 0; }
+  .lcard .icon.passed { background: #fff; }
+  .lcard .icon.passed img { width: 80%; height: auto; display: block; }
+  @media (max-width: 560px) { .lintro { gap: 12px; align-items: flex-start; } .lintro .lmark { width: 64px; margin-top: 4px; } .lintro .lhead b { font-size: 28px; } }
   .blocker { margin-top: 10px; padding: 8px 10px; border-radius: 8px; background: var(--amber-soft); font-size: 13px; color: #8a5e00; }
 
   footer { max-width: 1180px; margin: 0 auto; padding: 0 20px 30px; color: var(--ink-3); font-size: 12px; }
@@ -389,11 +400,13 @@
     lb.forEach(l => { const g = l.group || ""; let x = groups.find(y => y.name === g); if (!x) { x = { name: g, items: [] }; groups.push(x); } x.items.push(l); });
     html += `<section>${secHead("c-teal", I.recycle, "循環標誌申請進度", `${lb.length} 件申請`, "labels")}`;
     html += notes(w.labelsNotes).replace('class="card notes"', 'class="card notes" style="margin:0 0 18px"');
+    const li0 = w.labelsIntro;
+    if (li0) html += `<div class="card lintro">${li0.logo ? `<img class="lmark" src="${esc(li0.logo)}" alt="循環標誌">` : ""}<div class="lbody"><div class="lhead"><b>${esc(li0.count)}</b><span>${esc(li0.title)}</span></div>${(li0.items || []).length ? `<div class="lchips">${li0.items.map(x => `<span>${I.check} ${esc(x)}</span>`).join("")}</div>` : ""}${sub(li0.points)}</div></div>`;
     html += groups.map(g => `
       <div class="lgroup">${g.name ? `<div class="lgroup-title">${I.tag} ${esc(g.name)}</div>` : ""}
         <div class="grid grid-3">${g.items.map(l => `
           <div class="card lcard">
-            <div class="top"><div class="icon">${I.tag}</div><div><div class="item">${esc(l.item)}</div><div class="meta">${I.cal} 預計 ${esc(l.expected)}${l.owner ? ` ・ ${esc(l.owner)}` : ""}</div></div>${chip(l.change)}</div>
+            <div class="top"><div class="icon${l.stage === 5 && li0 && li0.logo ? " passed" : ""}">${l.stage === 5 && li0 && li0.logo ? `<img src="${esc(li0.logo)}" alt="已通過">` : I.tag}</div><div><div class="item">${esc(l.item)}</div><div class="meta">${I.cal} 預計 ${esc(l.expected)}${l.owner ? ` ・ ${esc(l.owner)}` : ""}</div></div>${chip(l.change)}</div>
             ${stepper(l.stage, LABEL_STAGES, "var(--teal)", true)}
             <div class="note">${esc(l.note)}${sub(l.details)}</div>
           </div>`).join("")}

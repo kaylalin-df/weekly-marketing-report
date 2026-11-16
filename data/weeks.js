@@ -166,6 +166,17 @@ window.WEEKLY_DATA = [
     keyClients: [],
     keyClientsNote: "本期無特別需要報告的項目。",
 
+    labelsIntro: {
+      logo: "assets/circular_mark.png",
+      count: "4 項",
+      title: "通過循環標誌",
+      items: ["rPP 再生布料－單紗", "rPP 再生布料－複紗", "rPP 識別證套", "rPP 名片盒"],
+      points: [
+        "11/4 資源循環署公開授證",
+        "11/13（五）業務部會議已布達給業務團隊",
+        "本週整理電子檔資料，提供給業務團隊使用"
+      ]
+    },
     labels: [
       {
         group: "rPP 產品線（五項）", item: "rPP 再生布料－單紗", stage: 5, expected: "—",
