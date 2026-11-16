@@ -95,3 +95,4 @@
 - 循環標誌區塊可加 `labelsIntro {logo, count, title, items[], points[]}`：區塊最上方的總覽卡（左側標誌圖），且 stage 5（核發）的卡片圖示會改成該標誌。標誌圖 `assets/circular_mark.png`（來源：下載/循環標誌/循環標誌-圖檔/標誌.png，縮成 400px）。W47：4 項通過、原訂 11/4 授證儀式延期（新日期待通知）、11/13（五）業務部會議布達、本週提供電子檔。
 - 「行銷工作進度」是給副總看的：只寫大方向，每項「已完成」「下一步」各一句（Kayla 2026-11-16 要求），不寫檔名、頁數、細節步驟。
 - 客戶卡可加 `logo`（assets/ 內圖檔），左上角改顯示 logo；沒有 logo 時維持色塊＋首字。W47：瀚克寶寶/QBEBE（logo_qbebe.png）、台灣日鑛金屬（logo_jx.png）、年青人眼鏡（logo_youngman.png；注意是「年青人」不是「年輕人」）。
+- outreach 可用 `board {title, stats[{value,label,sub}], lines[{k,text}]}` 取代「每月成效＋電話開發＋開發歷程」三張卡（W47 起，Kayla 2026-11-16 要求簡化）：board 內含下一步／待討論。W47 起不放 monthly、hot、timeline，統計格也拿掉電話那格；電話開發口徑寫「約 30 家」（系統互動紀錄 22 家，Kayla 指定約 30 家）。

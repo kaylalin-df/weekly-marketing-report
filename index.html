@@ -106,6 +106,8 @@
   .o-show figcaption { font-size: 12px; color: var(--ink-3); margin-top: 6px; }
   .o-funnel { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
   .o-funnel div { flex: 1 1 90px; background: #fafaf8; border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font-size: 12px; color: var(--ink-2); }
+  .o-board { margin-top: 14px; }
+  .o-funnel small { display: block; margin-top: 2px; color: var(--ink-3); font-size: 12px; }
   .o-funnel b { display: block; font-size: 20px; color: var(--ink); }
   .o-hot { list-style: none; margin: 0; padding: 0; }
   .o-hot li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 7px 0; border-top: 1px solid var(--line); font-size: 14px; }
@@ -115,6 +117,7 @@
   .o-time { list-style: none; margin: 0; padding: 0; font-size: 14px; }
   .o-time li { display: grid; grid-template-columns: 96px 1fr; gap: 10px; padding: 6px 0; }
   .o-time li b { color: var(--blue); font-variant-numeric: tabular-nums; }
+  .o-board .o-time li { grid-template-columns: 44px 1fr; }
   .scard .t { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
   .scard .meta { font-size: 12px; color: var(--ink-3); margin-bottom: 8px; }
   .scard p { margin: 0 0 6px; font-size: 14px; color: var(--ink-2); }
@@ -356,11 +359,13 @@
       html += `<section>${secHead("c-blue", I.users, "新客戶開發進度", esc(o.hint || ""), "outreach")}`;
       html += `<div class="o-stats">${(o.stats || []).map(x => `<div class="card o-stat"><div class="k">${esc(x.label)}</div><div class="v">${esc(x.value)}</div>${x.sub ? `<div class="d">${esc(x.sub)}</div>` : ""}</div>`).join("")}</div>`;
       if (o.note) html += `<div class="card o-note"><h3>${I.info} ${esc(o.note.title)}</h3>${o.note.text ? `<p>${esc(o.note.text)}</p>` : ""}${sub(o.note.points)}</div>`;
-      html += `<div class="grid grid-2">`;
+      if (o.monthly || o.hot) html += `<div class="grid grid-2">`;
       if (o.monthly) html += `<div class="card"><h3>${I.cal} 每月成效</h3><div class="o-wrap"><table class="o-table"><thead><tr><th>月份</th><th>寄出</th><th>開信率</th><th>點擊率</th><th>回覆率</th></tr></thead><tbody>${o.monthly.map(m => `<tr class="${m.total ? "total" : ""}"><td>${esc(m.month)}</td><td>${esc(m.sent)}</td><td>${esc(m.open)}</td><td>${esc(m.click)}</td><td>${esc(m.reply)}</td></tr>`).join("")}</tbody></table></div>${o.monthlyNote ? `<div class="ref" style="color:var(--ink-3)">${esc(o.monthlyNote)}</div>` : ""}</div>`;
       if (o.hot) html += `<div class="card"><h3>${I.flag} ${esc(o.hot.title || "熱名單")}</h3><div class="o-funnel">${(o.hot.counts || []).map(c => `<div><b>${esc(c.value)}</b>${esc(c.label)}</div>`).join("")}</div><ul class="o-hot">${(o.hot.list || []).map(h => `<li><span>${esc(h.name)}${h.note ? `<small>${esc(h.note)}</small>` : ""}</span><span class="o-tag ${h.tagType || ""}">${esc(h.status)}</span></li>`).join("")}</ul></div>`;
-      html += `</div>`;
-      if (o.timeline || o.next) html += `<div class="card" style="margin-top:14px">${o.timeline ? `<h3>${I.arrow} 開發歷程</h3><ul class="o-time">${o.timeline.map(t => `<li><b>${esc(t.date)}</b><span>${esc(t.text)}</span></li>`).join("")}</ul>` : ""}${o.next ? `<div class="next"><b>${I.arrow} 下一步</b><span${o.nextHl ? ' class="red-text"' : ""}>${esc(o.next)}</span></div>` : ""}${o.ask ? `<div class="ask"><b>${I.flag} 待討論</b><span>${esc(o.ask)}</span></div>` : ""}</div>`;
+      if (o.monthly || o.hot) html += `</div>`;
+      const nx = `${o.next ? `<div class="next"><b>${I.arrow} 下一步</b><span${o.nextHl ? ' class="red-text"' : ""}>${esc(o.next)}</span></div>` : ""}${o.ask ? `<div class="ask"><b>${I.flag} 待討論</b><span>${esc(o.ask)}</span></div>` : ""}`;
+      if (o.board) html += `<div class="card o-board"><h3>${I.flag} ${esc(o.board.title || "開發進度")}</h3>${(o.board.stats || []).length ? `<div class="o-funnel">${o.board.stats.map(c => `<div><b>${esc(c.value)}</b>${esc(c.label)}${c.sub ? `<small>${esc(c.sub)}</small>` : ""}</div>`).join("")}</div>` : ""}${(o.board.lines || []).length ? `<ul class="o-time">${o.board.lines.map(t => `<li><b>${esc(t.k)}</b><span>${esc(t.text)}</span></li>`).join("")}</ul>` : ""}${nx}</div>`;
+      else if (o.timeline || o.next) html += `<div class="card" style="margin-top:14px">${o.timeline ? `<h3>${I.arrow} 開發歷程</h3><ul class="o-time">${o.timeline.map(t => `<li><b>${esc(t.date)}</b><span>${esc(t.text)}</span></li>`).join("")}</ul>` : ""}${o.next ? `<div class="next"><b>${I.arrow} 下一步</b><span${o.nextHl ? ' class="red-text"' : ""}>${esc(o.next)}</span></div>` : ""}${o.ask ? `<div class="ask"><b>${I.flag} 待討論</b><span>${esc(o.ask)}</span></div>` : ""}</div>`;
       (o.cards || []).forEach(c => { html += `<div class="card o-show"><h3>${I.check} ${esc(c.title)}</h3>${c.summary ? `<p>${esc(c.summary)}</p>` : ""}${c.img ? `<figure><a href="${esc(c.img)}" target="_blank" rel="noopener"><img src="${esc(c.img)}" alt="${esc(c.alt || c.title)}" loading="lazy"></a>${c.caption ? `<figcaption>${esc(c.caption)}</figcaption>` : ""}</figure>` : ""}${sub(c.points)}</div>`; });
       html += `</section>`;
     }
