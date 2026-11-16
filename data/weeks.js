@@ -240,12 +240,12 @@ window.WEEKLY_DATA = [
       },
       {
         group: "暫緩／停止", item: "歐邁嘉 rPET 帽子", stage: 1, expected: "暫緩",
-        note: "歐邁嘉無法提供工廠登記等證明，rPET 服飾類品項暫緩，目前無法送件。",
+        note: "歐邁嘉表示目前沒有任何工廠登記相關的證明文件可提供，因此無法送件，rPET 服飾類品項暫緩。",
         change: "down"
       },
       {
         group: "暫緩／停止", item: "歐邁嘉 rPET T-shirt", stage: 1, expected: "暫緩",
-        note: "歐邁嘉無法提供工廠登記等證明，rPET 服飾類品項暫緩，目前無法送件。",
+        note: "歐邁嘉表示目前沒有任何工廠登記相關的證明文件可提供，因此無法送件，rPET 服飾類品項暫緩。",
         change: "down"
       },
       {
